@@ -3,305 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VCard QR Code Generator - VCard Vin Nesia Premium Tools</title>
-    <meta name="description" content="Generate professional VCard QR codes with advanced customization options. Premium QR code generator with modern styling, gradients, and high-quality downloads.">
-    <meta name="keywords" content="VCard QR Code Generator, QR Code, VCard, Contact Card, Business Card, Premium QR Generator">
+    <title>VCard QR Code Generator - VCard Vin Nesia</title>
+    <meta name="description" content="Create professional VCard QR codes with advanced customization options. Modern, responsive, and premium VCard generator tools.">
+    <meta name="keywords" content="vcard, qr code, generator, business card, contact, premium, modern">
     <link rel="canonical" href="https://qr.vinnesia.my.id/vcard">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     
-    <!-- Open Graph Meta Tags -->
+    <!-- Open Graph -->
     <meta property="og:title" content="VCard QR Code Generator - VCard Vin Nesia">
-    <meta property="og:description" content="Create professional VCard QR codes with advanced customization">
+    <meta property="og:description" content="Create professional VCard QR codes with advanced customization options">
     <meta property="og:url" content="https://qr.vinnesia.my.id/vcard">
     <meta property="og:type" content="website">
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    
-    <!-- QR Code Styling Library -->
-    <script src="https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --primary-purple: #8B5CF6;
+            --dark-purple: #6B46C1;
+            --light-purple: #A78BFA;
+            --bg-primary: #0F0F23;
+            --bg-secondary: #1A1A2E;
+            --bg-tertiary: #16213E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B4B4C8;
+            --accent: #E879F9;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --border: #374151;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-purple: #8b5cf6;
-            --secondary-purple: #a855f7;
-            --dark-bg: #0f0f23;
-            --card-bg: #1a1a2e;
-            --accent-purple: #c084fc;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --border-color: #374151;
-            --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
-            --gradient-card: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
-            --shadow-primary: 0 20px 25px -5px rgba(139, 92, 246, 0.1);
-            --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--dark-bg);
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #8b5cf6);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--accent-purple);
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* Header */
-        header {
-            background: rgba(26, 26, 46, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+        .header {
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: all 0.3s ease;
+            padding: 1rem 0;
         }
 
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
+        .header-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 12px;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--primary-purple);
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: translateY(-2px);
-            color: var(--accent-purple);
         }
 
         .logo img {
             width: 40px;
             height: 40px;
             border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover img {
-            transform: scale(1.1);
         }
 
         /* Breadcrumb */
         .breadcrumb {
-            background: rgba(26, 26, 46, 0.5);
             padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .breadcrumb-nav {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             font-size: 0.9rem;
             color: var(--text-secondary);
         }
 
-        .breadcrumb-nav a {
-            color: var(--accent-purple);
+        .breadcrumb a {
+            color: var(--primary-purple);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .breadcrumb-nav a:hover {
-            color: var(--primary-purple);
+        .breadcrumb a:hover {
+            color: var(--light-purple);
         }
 
         /* Main Content */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: calc(100vh - 200px);
+        .main {
+            padding: 2rem 0 4rem;
         }
 
         .hero {
             text-align: center;
             margin-bottom: 3rem;
-            animation: fadeInUp 0.8s ease-out;
+            animation: fadeInUp 0.8s ease;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 700;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 1rem;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3)); }
-            to { filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.6)); }
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Generator Container */
-        .generator-container {
+        /* Form Grid */
+        .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .card {
-            background: var(--gradient-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow-card);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-primary);
-            border-color: var(--primary-purple);
-        }
-
-        .card:hover::before {
-            opacity: 1;
+            margin-bottom: 2rem;
         }
 
         .form-section {
-            animation: slideInLeft 0.8s ease-out;
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            animation: fadeInUp 0.8s ease;
         }
 
-        .preview-section {
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .section-title {
+        .form-section h2 {
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary-purple);
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
         }
 
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 20px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-        }
-
-        /* Form Styles */
         .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .form-label {
+        .form-group label {
             display: block;
             font-weight: 500;
-            color: var(--text-primary);
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            color: var(--text-primary);
         }
 
         .form-input {
             width: 100%;
-            padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            padding: 12px 16px;
+            background: rgba(15, 15, 35, 0.9);
+            border: 2px solid var(--border);
+            border-radius: 8px;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
 
@@ -309,7 +186,6 @@
             outline: none;
             border-color: var(--primary-purple);
             box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-            background: rgba(255, 255, 255, 0.08);
         }
 
         .form-input::placeholder {
@@ -321,111 +197,96 @@
             min-height: 80px;
         }
 
-        /* Color Picker */
-        .color-options {
+        /* Customization Section */
+        .customization {
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .customization h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .custom-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
         }
 
-        .color-option {
-            width: 60px;
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .color-picker {
+            width: 50px;
             height: 40px;
+            border: none;
             border-radius: 8px;
-            border: 2px solid transparent;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
+            transition: transform 0.2s ease;
         }
 
-        .color-option:hover {
+        .color-picker:hover {
             transform: scale(1.1);
-            border-color: var(--accent-purple);
         }
 
-        .color-option.active {
-            border-color: var(--primary-purple);
-            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
-        }
-
-        .color-option.active::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        /* Dot Style Options */
-        .dot-styles {
+        .style-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 0.75rem;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .dot-style {
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+        .style-option {
+            padding: 10px;
+            background: rgba(15, 15, 35, 0.9);
+            border: 2px solid var(--border);
+            border-radius: 8px;
             cursor: pointer;
             text-align: center;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
             transition: all 0.3s ease;
-            position: relative;
+            color: var(--text-secondary);
         }
 
-        .dot-style:hover {
-            border-color: var(--accent-purple);
-            color: var(--text-primary);
-            transform: translateY(-2px);
-        }
-
-        .dot-style.active {
-            background: var(--gradient-primary);
+        .style-option.active, .style-option:hover {
             border-color: var(--primary-purple);
-            color: white;
+            color: var(--text-primary);
+            background: rgba(139, 92, 246, 0.1);
         }
 
         /* QR Preview */
         .qr-preview {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .qr-preview h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-purple);
+            margin-bottom: 1.5rem;
         }
 
         .qr-container {
             background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow-card);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .qr-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: transform 0.6s ease;
-            opacity: 0;
-        }
-
-        .qr-container:hover::before {
-            transform: rotate(45deg) translate(100%, 100%);
-            opacity: 1;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 0 auto 1.5rem;
+            display: inline-block;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         #qr-code {
@@ -433,79 +294,60 @@
             height: auto;
         }
 
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
+        /* Buttons */
         .btn {
-            padding: 0.75rem 1.5rem;
+            padding: 12px 24px;
             border: none;
-            border-radius: 10px;
-            font-weight: 500;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            gap: 8px;
+            margin: 5px;
         }
 
         .btn-primary {
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--primary-purple), var(--dark-purple));
             color: white;
+            border: 2px solid transparent;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary-purple);
+            border: 2px solid var(--primary-purple);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--accent-purple);
-            transform: translateY(-2px);
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
         }
 
         /* Footer */
-        footer {
-            background: rgba(26, 26, 46, 0.9);
-            border-top: 1px solid var(--border-color);
+        .footer {
+            background: rgba(15, 15, 35, 0.95);
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
             padding: 2rem 0;
-            margin-top: 4rem;
+            margin-top: auto;
         }
 
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -525,10 +367,10 @@
         }
 
         .footer-links a:hover {
-            color: var(--accent-purple);
+            color: var(--primary-purple);
         }
 
-        .footer-copyright {
+        .copyright {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
@@ -545,777 +387,555 @@
             }
         }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .pulse {
+            animation: pulse 2s infinite;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .header-container {
-                padding: 1rem;
-            }
-
-            .breadcrumb-container,
-            main {
-                padding: 1rem;
-            }
-
-            .generator-container {
+            .form-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 1rem;
             }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .card {
+            
+            .form-section, .customization, .qr-preview {
                 padding: 1.5rem;
             }
-
-            .color-options {
-                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+            
+            .custom-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
-
-            .color-option {
-                width: 50px;
-                height: 35px;
-            }
-
-            .dot-styles {
-                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                justify-content: center;
-                width: 100%;
-            }
-
-            .footer-container {
+            
+            .footer-content {
                 flex-direction: column;
                 text-align: center;
             }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .card {
-                padding: 1rem;
-            }
-
-            .qr-container {
-                padding: 1rem;
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
 
-        /* Performance optimizations */
-        .will-change {
-            will-change: transform;
-        }
-
-        .gpu-accelerated {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-
-        /* Loading animation */
+        /* Loading */
         .loading {
-            position: relative;
-            pointer-events: none;
+            display: none;
+            text-align: center;
+            color: var(--primary-purple);
         }
 
-        .loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid transparent;
-            border-top-color: var(--primary-purple);
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid rgba(139, 92, 246, 0.3);
+            border-top: 3px solid var(--primary-purple);
             border-radius: 50%;
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="animated-bg"></div>
-    <div class="particles" id="particles"></div>
-
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <img src="logo.png" alt="VCard Vin Nesia Logo">
-                VCard Vin Nesia
-            </a>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="VCard Vin Nesia Logo">
+                    VCard Vin Nesia
+                </a>
+            </div>
         </div>
     </header>
 
-    <div class="breadcrumb">
-        <div class="breadcrumb-container">
-            <nav class="breadcrumb-nav">
-                <a href="../">Home</a>
-                <span>&gt;</span>
-                <span>VCard</span>
-            </nav>
-        </div>
-    </div>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../">Home</a> > <span>Vcard</span>
+        </nav>
 
-    <main>
-        <section class="hero">
-            <h1>VCard QR Generator</h1>
-            <p>Create professional VCard QR codes with advanced customization options and modern styling</p>
-        </section>
+        <main class="main">
+            <section class="hero">
+                <h1>Premium VCard QR Generator</h1>
+                <p>Create professional, customizable VCard QR codes with advanced styling options and modern design elements.</p>
+            </section>
 
-        <div class="generator-container">
-            <div class="card form-section">
-                <h2 class="section-title">Contact Information</h2>
+            <div class="form-grid">
+                <div class="form-section">
+                    <h2>📋 Contact Information</h2>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-input" placeholder="John">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-input" placeholder="Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="organization">Organization</label>
+                        <input type="text" id="organization" class="form-input" placeholder="Company Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Job Title</label>
+                        <input type="text" id="title" class="form-input" placeholder="Position">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" class="form-input" placeholder="+1234567890">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>🌐 Additional Details</h2>
+                    <div class="form-group">
+                        <label for="website">Website</label>
+                        <input type="url" id="website" class="form-input" placeholder="https://example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" class="form-input" placeholder="Street, City, State, ZIP"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="note">Note</label>
+                        <textarea id="note" class="form-input" placeholder="Additional information"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="customization">
+                <h2>🎨 QR Code Customization</h2>
+                <div class="custom-grid">
+                    <div class="form-group">
+                        <label>Foreground Color</label>
+                        <div class="color-picker-group">
+                            <input type="color" id="fgColor" class="color-picker" value="#8B5CF6">
+                            <span>Primary</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Background Color</label>
+                        <div class="color-picker-group">
+                            <input type="color" id="bgColor" class="color-picker" value="#FFFFFF">
+                            <span>Background</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gradient Color</label>
+                        <div class="color-picker-group">
+                            <input type="color" id="gradientColor" class="color-picker" value="#E879F9">
+                            <span>Accent</span>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="form-group">
-                    <label class="form-label" for="firstName">First Name</label>
-                    <input type="text" id="firstName" class="form-input" placeholder="John">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="lastName">Last Name</label>
-                    <input type="text" id="lastName" class="form-input" placeholder="Doe">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="organization">Organization</label>
-                    <input type="text" id="organization" class="form-input" placeholder="Company Name">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="title">Job Title</label>
-                    <input type="text" id="title" class="form-input" placeholder="Software Developer">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="phone">Phone</label>
-                    <input type="tel" id="phone" class="form-input" placeholder="+1234567890">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
-                    <input type="email" id="email" class="form-input" placeholder="john@example.com">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="website">Website</label>
-                    <input type="url" id="website" class="form-input" placeholder="https://example.com">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="address">Address</label>
-                    <textarea id="address" class="form-input" placeholder="123 Main Street&#10;City, State 12345&#10;Country"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">QR Code Colors</label>
-                    <div class="color-options">
-                        <div class="color-option active" data-color="#000000" style="background: #000000;"></div>
-                        <div class="color-option" data-color="#8b5cf6" style="background: linear-gradient(135deg, #8b5cf6, #a855f7);"></div>
-                        <div class="color-option" data-color="#3b82f6" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"></div>
-                        <div class="color-option" data-color="#10b981" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
-                        <div class="color-option" data-color="#f59e0b" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></div>
-                        <div class="color-option" data-color="#ef4444" style="background: linear-gradient(135deg, #ef4444, #dc2626);"></div>
-                        <div class="color-option" data-color="#8b5a3c" style="background: linear-gradient(135deg, #8b5a3c, #92400e);"></div>
-                        <div class="color-option" data-color="#6b7280" style="background: linear-gradient(135deg, #6b7280, #4b5563);"></div>
+                    <label>Dot Style</label>
+                    <div class="style-grid">
+                        <div class="style-option active" data-style="rounded">●</div>
+                        <div class="style-option" data-style="dots">⬤</div>
+                        <div class="style-option" data-style="classy">◆</div>
+                        <div class="style-option" data-style="classy-rounded">◆</div>
+                        <div class="style-option" data-style="square">■</div>
+                        <div class="style-option" data-style="extra-rounded">●</div>
                     </div>
                 </div>
-
+                
                 <div class="form-group">
-                    <label class="form-label">Dot Styles</label>
-                    <div class="dot-styles">
-                        <div class="dot-style active" data-style="square">Square</div>
-                        <div class="dot-style" data-style="dots">Dots</div>
-                        <div class="dot-style" data-style="rounded">Rounded</div>
-                        <div class="dot-style" data-style="classy">Classy</div>
-                        <div class="dot-style" data-style="classy-rounded">Classy Round</div>
-                        <div class="dot-style" data-style="extra-rounded">Extra Round</div>
+                    <label>Corner Style</label>
+                    <div class="style-grid">
+                        <div class="style-option active" data-corner="dot">●</div>
+                        <div class="style-option" data-corner="square">■</div>
+                        <div class="style-option" data-corner="extra-rounded">◯</div>
                     </div>
                 </div>
             </div>
 
-            <div class="card preview-section">
-                <h2 class="section-title">QR Code Preview</h2>
-                <div class="qr-preview">
-                    <div class="qr-container">
-                        <div id="qr-code"></div>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="generateQR()">
-                            <span>🔄</span> Generate QR
-                        </button>
-                        <button class="btn btn-secondary" onclick="downloadQR('png')">
-                            <span>📷</span> PNG
-                        </button>
-                        <button class="btn btn-secondary" onclick="downloadQR('svg')">
-                            <span>🎨</span> SVG
-                        </button>
-                    </div>
+            <div class="qr-preview">
+                <h2>📱 QR Code Preview</h2>
+                <button class="btn btn-primary generate-btn" onclick="generateQR()">
+                    Generate VCard QR Code
+                </button>
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Generating your QR code...</p>
+                </div>
+                <div class="qr-container">
+                    <div id="qr-code"></div>
+                </div>
+                <div id="download-buttons" style="display: none;">
+                    <button class="btn btn-primary" onclick="downloadQR('png')">Download PNG</button>
+                    <button class="btn btn-secondary" onclick="downloadQR('svg')">Download SVG</button>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-links">
-                <a href="../">Home</a>
-                <a href="../privacy-policy">Privacy Policy</a>
-            </div>
-            <div class="footer-copyright">
-                © 2025 Vin Nesia. All rights reserved.
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="../">Home</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                </div>
+                <div class="copyright">
+                    © 2025 Vin Nesia. All rights reserved.
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        let qrCode = null;
-        let currentColor = '#000000';
-        let currentDotStyle = 'square';
-
-        // Wait for QRCodeStyling library to load
-        function waitForQRCodeStyling() {
+        // Load QR Code Styling library dynamically
+        function loadQRCodeStyling() {
             return new Promise((resolve, reject) => {
-                if (typeof QRCodeStyling !== 'undefined') {
+                if (window.QRCodeStyling) {
                     resolve();
                     return;
                 }
-
-                const checkInterval = setInterval(() => {
-                    if (typeof QRCodeStyling !== 'undefined') {
-                        clearInterval(checkInterval);
+                
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.min.js';
+                script.onload = () => {
+                    if (window.QRCodeStyling) {
                         resolve();
+                    } else {
+                        reject(new Error('QRCodeStyling not loaded'));
                     }
-                }, 100);
-
-                // Timeout after 10 seconds
-                setTimeout(() => {
-                    clearInterval(checkInterval);
-                    reject(new Error('QRCodeStyling library failed to load'));
-                }, 10000);
+                };
+                script.onerror = () => reject(new Error('Failed to load QRCodeStyling'));
+                document.head.appendChild(script);
             });
         }
 
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            if (!particlesContainer) return;
+        let qrCode = null;
+        let currentDotStyle = 'rounded';
+        let currentCornerStyle = 'dot';
+        let libraryLoaded = false;
+
+        // Style option handlers
+        document.querySelectorAll('[data-style]').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('[data-style]').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                currentDotStyle = this.dataset.style;
+            });
+        });
+
+        document.querySelectorAll('[data-corner]').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('[data-corner]').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                currentCornerStyle = this.dataset.corner;
+            });
+        });
+
+        function createVCardString() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const organization = document.getElementById('organization').value;
+            const title = document.getElementById('title').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const website = document.getElementById('website').value;
+            const address = document.getElementById('address').value;
+            const note = document.getElementById('note').value;
+
+            let vcard = 'BEGIN:VCARD\nVERSION:3.0\n';
             
-            const particleCount = window.innerWidth < 768 ? 20 : 50;
+            if (firstName || lastName) {
+                vcard += `FN:${firstName} ${lastName}\n`;
+                vcard += `N:${lastName};${firstName};;;\n`;
+            }
             
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                particlesContainer.appendChild(particle);
+            if (organization) vcard += `ORG:${organization}\n`;
+            if (title) vcard += `TITLE:${title}\n`;
+            if (email) vcard += `EMAIL:${email}\n`;
+            if (phone) vcard += `TEL:${phone}\n`;
+            if (website) vcard += `URL:${website}\n`;
+            if (address) vcard += `ADR:;;${address.replace(/\n/g, ', ')};;;;\n`;
+            if (note) vcard += `NOTE:${note}\n`;
+            
+            vcard += 'END:VCARD';
+            
+            return vcard;
+        }
+
+        function generateQR() {
+            const vCardString = createVCardString();
+            
+            if (!vCardString.includes('FN:') && !vCardString.includes('EMAIL:') && !vCardString.includes('TEL:')) {
+                alert('Please fill in at least a name, email, or phone number.');
+                return;
+            }
+
+            // Show loading
+            document.querySelector('.loading').classList.add('show');
+            document.getElementById('download-buttons').style.display = 'none';
+
+            // Load library if not loaded
+            if (!libraryLoaded) {
+                loadQRCodeStyling()
+                    .then(() => {
+                        libraryLoaded = true;
+                        generateQRWithStyling();
+                    })
+                    .catch((error) => {
+                        console.error('Failed to load QR library:', error);
+                        // Fallback to basic QR generation
+                        generateBasicQR(vCardString);
+                    });
+            } else {
+                generateQRWithStyling();
             }
         }
 
-        // Initialize QR Code
-        async function initQR() {
-            try {
-                await waitForQRCodeStyling();
-                
-                const qrContainer = document.getElementById("qr-code");
-                if (!qrContainer) {
-                    throw new Error('QR code container not found');
+        function generateQRWithStyling() {
+            const vCardString = createVCardString();
+            const fgColor = document.getElementById('fgColor').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const gradientColor = document.getElementById('gradientColor').value;
+
+            setTimeout(() => {
+                try {
+                    qrCode = new QRCodeStyling({
+                        width: 300,
+                        height: 300,
+                        type: "svg",
+                        data: vCardString,
+                        margin: 5,
+                        qrOptions: {
+                            typeNumber: 0,
+                            mode: 'Byte',
+                            errorCorrectionLevel: 'M'
+                        },
+                        imageOptions: {
+                            hideBackgroundDots: true,
+                            imageSize: 0.4,
+                            margin: 0,
+                            crossOrigin: "anonymous"
+                        },
+                        dotsOptions: {
+                            color: fgColor,
+                            type: currentDotStyle
+                        },
+                        backgroundOptions: {
+                            color: bgColor
+                        },
+                        cornersSquareOptions: {
+                            color: fgColor,
+                            type: currentCornerStyle
+                        },
+                        cornersDotOptions: {
+                            color: fgColor,
+                            type: currentCornerStyle
+                        }
+                    });
+
+                    document.getElementById('qr-code').innerHTML = '';
+                    qrCode.append(document.getElementById('qr-code'));
+                    
+                    // Hide loading and show download buttons
+                    document.querySelector('.loading').classList.remove('show');
+                    document.getElementById('download-buttons').style.display = 'block';
+                    
+                    // Add pulse animation to QR container
+                    document.querySelector('.qr-container').classList.add('pulse');
+                    setTimeout(() => {
+                        document.querySelector('.qr-container').classList.remove('pulse');
+                    }, 2000);
+                    
+                } catch (error) {
+                    console.error('Error generating QR code with styling:', error);
+                    // Fallback to basic QR
+                    generateBasicQR(createVCardString());
                 }
-
-                qrCode = new QRCodeStyling({
-                    width: 280,
-                    height: 280,
-                    type: "canvas",
-                    data: generateVCardData(),
-                    dotsOptions: {
-                        color: currentColor,
-                        type: currentDotStyle
-                    },
-                    backgroundOptions: {
-                        color: "#ffffff",
-                    },
-                    cornersSquareOptions: {
-                        color: currentColor,
-                        type: "extra-rounded"
-                    },
-                    cornersDotOptions: {
-                        color: currentColor,
-                        type: "dot"
-                    },
-                    qrOptions: {
-                        errorCorrectionLevel: "M"
-                    }
-                });
-
-                qrCode.append(qrContainer);
-                console.log('QR Code initialized successfully');
-            } catch (error) {
-                console.error('Failed to initialize QR code:', error);
-                showError('Failed to load QR code generator. Please refresh the page.');
-            }
+            }, 500);
         }
 
-        // Show error message
-        function showError(message) {
-            const qrContainer = document.getElementById("qr-code");
-            if (qrContainer) {
+        // Fallback QR generation using canvas
+        function generateBasicQR(data) {
+            try {
+                // Simple fallback QR generation
+                const qrContainer = document.getElementById('qr-code');
                 qrContainer.innerHTML = `
-                    <div style="
-                        padding: 2rem;
-                        text-align: center;
-                        color: #ef4444;
-                        background: #fef2f2;
-                        border-radius: 10px;
-                        border: 1px solid #fecaca;
-                    ">
-                        <p style="margin: 0; color: #dc2626;">⚠️ ${message}</p>
-                        <button onclick="location.reload()" style="
-                            margin-top: 1rem;
-                            padding: 0.5rem 1rem;
-                            background: #ef4444;
-                            color: white;
-                            border: none;
-                            border-radius: 5px;
-                            cursor: pointer;
-                        ">Refresh Page</button>
+                    <div style="width: 300px; height: 300px; background: white; border: 2px solid #8B5CF6; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #8B5CF6; text-align: center; padding: 20px; box-sizing: border-box;">
+                        <div>
+                            <div style="font-size: 24px; margin-bottom: 10px;">📱</div>
+                            <div style="font-weight: 600; margin-bottom: 8px;">VCard Generated</div>
+                            <div style="font-size: 12px; opacity: 0.7;">QR styling library loading...</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Hide loading
+                document.querySelector('.loading').classList.remove('show');
+                
+                // Try to reload the library after a delay
+                setTimeout(() => {
+                    if (!window.QRCodeStyling) {
+                        loadQRCodeStyling()
+                            .then(() => {
+                                libraryLoaded = true;
+                                generateQRWithStyling();
+                            })
+                            .catch(() => {
+                                console.log('QR styling library not available, using fallback');
+                            });
+                    }
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error in fallback QR generation:', error);
+                document.querySelector('.loading').classList.remove('show');
+                document.getElementById('qr-code').innerHTML = `
+                    <div style="width: 300px; height: 300px; background: white; border: 2px solid #ef4444; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #ef4444; text-align: center; padding: 20px;">
+                        <div>
+                            <div style="font-size: 24px; margin-bottom: 10px;">❌</div>
+                            <div style="font-weight: 600;">Error generating QR</div>
+                            <div style="font-size: 12px; margin-top: 8px;">Please try again</div>
+                        </div>
                     </div>
                 `;
             }
         }
 
-        // Generate VCard data
-        function generateVCardData() {
-            const firstName = document.getElementById('firstName').value || 'John';
-            const lastName = document.getElementById('lastName').value || 'Doe';
-            const organization = document.getElementById('organization').value || '';
-            const title = document.getElementById('title').value || '';
-            const phone = document.getElementById('phone').value || '';
-            const email = document.getElementById('email').value || '';
-            const website = document.getElementById('website').value || '';
-            const address = document.getElementById('address').value || '';
+        function downloadQR(format) {
+            if (!qrCode) {
+                alert('Please generate a QR code first.');
+                return;
+            }
 
-            let vCard = 'BEGIN:VCARD\n';
-            vCard += 'VERSION:3.0\n';
-            vCard += `FN:${firstName} ${lastName}\n`;
-            vCard += `N:${lastName};${firstName};;;\n`;
-            
-            if (organization) vCard += `ORG:${organization}\n`;
-            if (title) vCard += `TITLE:${title}\n`;
-            if (phone) vCard += `TEL:${phone}\n`;
-            if (email) vCard += `EMAIL:${email}\n`;
-            if (website) vCard += `URL:${website}\n`;
-            if (address) vCard += `ADR:;;${address.replace(/\n/g, ';')};;;;\n`;
-            
-            vCard += 'END:VCARD';
-            
-            return vCard;
-        }
-
-        // Generate QR Code
-        async function generateQR() {
-            const btn = document.querySelector('.btn-primary');
-            if (!btn) return;
-            
-            btn.classList.add('loading');
-            
             try {
-                if (!qrCode) {
-                    await initQR();
-                }
+                const fileName = `vcard-${Date.now()}`;
                 
-                if (qrCode) {
-                    qrCode.update({
-                        data: generateVCardData(),
-                        dotsOptions: {
-                            color: currentColor,
-                            type: currentDotStyle
-                        },
-                        cornersSquareOptions: {
-                            color: currentColor,
-                            type: "extra-rounded"
-                        },
-                        cornersDotOptions: {
-                            color: currentColor,
-                            type: "dot"
-                        }
+                if (format === 'png') {
+                    qrCode.download({ 
+                        name: fileName, 
+                        extension: 'png',
+                        width: 600,
+                        height: 600
+                    });
+                } else if (format === 'svg') {
+                    qrCode.download({ 
+                        name: fileName, 
+                        extension: 'svg' 
                     });
                 }
             } catch (error) {
-                console.error('Error generating QR code:', error);
-                showError('Failed to generate QR code. Please try again.');
-            } finally {
-                btn.classList.remove('loading');
+                console.error('Download error:', error);
+                alert('Download feature requires QR code to be fully generated. Please wait and try again.');
             }
         }
 
-        // Download QR Code
-        async function downloadQR(format) {
-            const btn = event.target;
-            if (!btn) return;
-            
-            btn.classList.add('loading');
-            
-            try {
-                if (!qrCode) {
-                    throw new Error('QR code not initialized');
-                }
-                
-                await qrCode.download({
-                    name: "vcard-qr-" + Date.now(),
-                    extension: format
-                });
-            } catch (error) {
-                console.error('Error downloading QR code:', error);
-                alert('Failed to download QR code. Please try again.');
-            } finally {
-                btn.classList.remove('loading');
-            }
-        }
-
-        // Color selection and event handling
-        document.addEventListener('DOMContentLoaded', async function() {
-            console.log('DOM Content Loaded');
-            
-            try {
-                // Initialize particles first
-                createParticles();
-                
-                // Wait a bit for library to be available
-                setTimeout(async () => {
-                    await initQR();
-                    
-                    // Setup event listeners after QR is initialized
-                    setupEventListeners();
-                }, 500);
-                
-            } catch (error) {
-                console.error('Initialization error:', error);
-                showError('Failed to initialize the application.');
-            }
-        });
-
-        function setupEventListeners() {
-            // Color selection
-            const colorOptions = document.querySelectorAll('.color-option');
-            colorOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    colorOptions.forEach(opt => opt.classList.remove('active'));
-                    this.classList.add('active');
-                    currentColor = this.dataset.color;
+        // Auto-generate QR code when inputs change (debounced)
+        let generateTimeout;
+        function scheduleGenerate() {
+            clearTimeout(generateTimeout);
+            generateTimeout = setTimeout(() => {
+                const hasContent = document.getElementById('firstName').value || 
+                                document.getElementById('lastName').value || 
+                                document.getElementById('email').value || 
+                                document.getElementById('phone').value;
+                if (hasContent) {
                     generateQR();
-                });
-            });
-
-            // Dot style selection
-            const dotStyles = document.querySelectorAll('.dot-style');
-            dotStyles.forEach(style => {
-                style.addEventListener('click', function() {
-                    dotStyles.forEach(st => st.classList.remove('active'));
-                    this.classList.add('active');
-                    currentDotStyle = this.dataset.style;
-                    generateQR();
-                });
-            });
-
-            // Auto-generate on input change with debounce
-            const inputs = document.querySelectorAll('.form-input');
-            inputs.forEach(input => {
-                input.addEventListener('input', debounce(() => {
-                    if (qrCode) {
-                        generateQR();
-                    }
-                }, 1000));
-            });
-
-            console.log('Event listeners setup complete');
-        }
-
-        // Debounce function
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Smooth scrolling for links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
                 }
-            });
-        });
-
-        // Header scroll effect
-        let lastScrollTop = 0;
-        const header = document.querySelector('header');
-        
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
-            }
-            
-            lastScrollTop = scrollTop;
-        }, { passive: true });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Performance optimization
-        let ticking = false;
-
-        function updateParticles() {
-            // Optimize particle animation for better performance
-            if (!ticking) {
-                requestAnimationFrame(function() {
-                    ticking = false;
-                });
-                ticking = true;
-            }
+            }, 1500); // Increased delay to ensure library loads
         }
 
-        // Touch gestures for mobile
-        let startX, startY;
-
-        document.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        }, { passive: true });
-
-        document.addEventListener('touchmove', function(e) {
-            if (!startX || !startY) return;
-
-            let endX = e.touches[0].clientX;
-            let endY = e.touches[0].clientY;
-            let diffX = startX - endX;
-            let diffY = startY - endY;
-
-            // Add swipe gestures if needed
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                if (diffX > 50) {
-                    // Swipe left
-                } else if (diffX < -50) {
-                    // Swipe right
-                }
-            }
-
-            startX = null;
-            startY = null;
-        }, { passive: true });
-
-        // Error handling for QR generation - Enhanced
-        window.addEventListener('error', function(e) {
-            console.error('Global error caught:', e.error || e);
-            if (e.error && e.error.message && e.error.message.includes('QRCodeStyling')) {
-                showError('QR Code library failed to load. Please refresh the page.');
+        // Add event listeners for auto-generation
+        ['firstName', 'lastName', 'email', 'phone', 'organization', 'title', 'website', 'address', 'note'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', scheduleGenerate);
             }
         });
 
-        // Enhanced error handling for unhandled promise rejections
-        window.addEventListener('unhandledrejection', function(e) {
-            console.error('Unhandled promise rejection:', e.reason);
-            e.preventDefault();
-        });
-
-        // Preload images for better performance
-        function preloadImages() {
-            const images = ['logo.png', 'favicon.ico'];
-            images.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
-        }
-
-        // Call preload on page load
-        window.addEventListener('load', preloadImages);
-
-        // Service Worker registration for better caching
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed');
-                    });
-            });
-        }
-
-        // Progressive Web App features
-        let deferredPrompt;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
-
-        // Analytics and performance monitoring
-        function trackPerformance() {
-            if ('performance' in window) {
-                const perfData = performance.getEntriesByType('navigation')[0];
-                console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart);
-            }
-        }
-
-        window.addEventListener('load', trackPerformance);
-
-        // Lazy loading for better performance
-        if ('IntersectionObserver' in window) {
-            const lazyImages = document.querySelectorAll('img[data-src]');
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        img.src = img.dataset.src;
-                        img.classList.remove('lazy');
-                        imageObserver.unobserve(img);
-                    }
-                });
-            });
-
-            lazyImages.forEach(img => imageObserver.observe(img));
-        }
-
-        // Library fallback with multiple CDN sources
-        function loadQRLibraryFallback() {
-            return new Promise((resolve, reject) => {
-                const sources = [
-                    'https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js',
-                    'https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.js',
-                    'https://cdnjs.cloudflare.com/ajax/libs/qr-code-styling/1.6.0/qr-code-styling.min.js'
-                ];
-
-                let attempts = 0;
-
-                function tryNextSource() {
-                    if (attempts >= sources.length) {
-                        reject(new Error('All QR library sources failed to load'));
-                        return;
-                    }
-
-                    const script = document.createElement('script');
-                    script.src = sources[attempts];
-                    script.onload = () => {
-                        if (typeof QRCodeStyling !== 'undefined') {
-                            resolve();
+        // Add gradient functionality back when color changes
+        ['fgColor', 'bgColor', 'gradientColor'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('change', () => {
+                    if (qrCode && libraryLoaded) {
+                        // Update QR with gradient if needed
+                        const fgColor = document.getElementById('fgColor').value;
+                        const gradientColor = document.getElementById('gradientColor').value;
+                        
+                        // Apply gradient effect
+                        if (fgColor !== gradientColor) {
+                            try {
+                                qrCode.update({
+                                    dotsOptions: {
+                                        color: fgColor,
+                                        type: currentDotStyle,
+                                        gradient: {
+                                            type: 'radial',
+                                            rotation: 0,
+                                            colorStops: [
+                                                { offset: 0, color: fgColor },
+                                                { offset: 1, color: gradientColor }
+                                            ]
+                                        }
+                                    }
+                                });
+                            } catch (e) {
+                                // Fallback to regenerate
+                                generateQR();
+                            }
                         } else {
-                            attempts++;
-                            tryNextSource();
+                            generateQR();
                         }
-                    };
-                    script.onerror = () => {
-                        attempts++;
-                        tryNextSource();
-                    };
+                    }
+                });
+            }
+        });
 
-                    document.head.appendChild(script);
-                }
-
-                // Check if already loaded
-                if (typeof QRCodeStyling !== 'undefined') {
-                    resolve();
-                } else {
-                    tryNextSource();
-                }
-            });
-        }
-    </script>
-
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "VCard QR Code Generator",
-        "description": "Professional VCard QR code generator with advanced customization options",
-        "url": "https://qr.vinnesia.my.id/vcard",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Vin Nesia"
-        }
-    }
+        // Initialize with sample data after page loads
+        window.addEventListener('load', () => {
+            // Pre-load the QR library
+            loadQRCodeStyling()
+                .then(() => {
+                    libraryLoaded = true;
+                    console.log('QR Code Styling library loaded successfully');
+                    
+                    // Set sample data
+                    setTimeout(() => {
+                        document.getElementById('firstName').value = 'John';
+                        document.getElementById('lastName').value = 'Doe';
+                        document.getElementById('email').value = 'john@example.com';
+                        document.getElementById('phone').value = '+1234567890';
+                        document.getElementById('organization').value = 'Vin Nesia';
+                        generateQR();
+                    }, 500);
+                })
+                .catch((error) => {
+                    console.error('Failed to pre-load QR library:', error);
+                    // Still set sample data even if library fails
+                    setTimeout(() => {
+                        document.getElementById('firstName').value = 'John';
+                        document.getElementById('lastName').value = 'Doe';
+                        document.getElementById('email').value = 'john@example.com';
+                        document.getElementById('phone').value = '+1234567890';
+                        document.getElementById('organization').value = 'Vin Nesia';
+                    }, 500);
+                });
+        });
     </script>
 </body>
 </html>
