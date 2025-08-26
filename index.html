@@ -7,7 +7,9 @@
     <meta name="description" content="Create professional VCard QR codes with advanced customization options. Modern, responsive, and premium VCard generator tools.">
     <meta name="keywords" content="vcard, qr code, generator, business card, contact, premium, modern">
     <link rel="canonical" href="https://qr.vinnesia.my.id/vcard">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📱%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="favicon-v1.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon-v1.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="favicon-v1.png">
     
     <!-- Open Graph -->
     <meta property="og:title" content="VCard QR Code Generator - VCard Vin Nesia">
@@ -94,9 +96,7 @@
             gap: 12px;
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-purple), var(--accent-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-primary);
             text-decoration: none;
             transition: transform 0.2s ease;
         }
@@ -108,13 +108,14 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--accent-red));
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
             box-shadow: var(--shadow-purple);
+        }
+
+        .logo-text {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Breadcrumb */
@@ -677,8 +678,8 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
-                    <div class="logo-icon">📱</div>
-                    VCard Vin Nesia
+                    <img src="logo.png" alt="VCard Vin Nesia Logo" class="logo-icon">
+                    <span class="logo-text">VCard Vin Nesia</span>
                 </a>
             </div>
         </div>
