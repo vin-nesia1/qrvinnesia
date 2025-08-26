@@ -11,13 +11,11 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Vin Nesia Card - Professional QR vCard & Digital Business Card Generator</title>
     
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://qr.vinnesia.my.id/vcard">
     <meta property="og:title" content="Vin Nesia Card - QR vCard & Digital Business Card Generator">
     <meta property="og:description" content="Create professional QR vCards and digital business cards with advanced customization">
     
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://qr.vinnesia.my.id/vcard">
     <meta property="twitter:title" content="Vin Nesia Card - QR vCard Generator">
@@ -64,7 +62,7 @@
         nav {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem; /* Adjusted padding for better spacing */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -90,7 +88,7 @@
         .breadcrumb {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -112,7 +110,7 @@
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1.5rem; /* Consistent padding */
             min-height: calc(100vh - 200px);
         }
 
@@ -122,7 +120,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.25rem, 5vw, 3.5rem); /* Adjusted for better scaling */
             font-weight: 800;
             background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
             -webkit-background-clip: text;
@@ -132,9 +130,9 @@
         }
 
         .hero p {
-            font-size: 1.125rem;
+            font-size: clamp(1rem, 2.5vw, 1.125rem); /* Fluid font size */
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 650px; /* Increased max-width */
             margin: 0 auto 2rem;
             animation: fadeInUp 1s ease-out 0.2s both;
         }
@@ -146,6 +144,7 @@
             gap: 1rem;
             margin-bottom: 3rem;
             animation: fadeInUp 1s ease-out 0.4s both;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
         }
 
         .mode-btn {
@@ -195,18 +194,20 @@
             display: block;
         }
 
+        /* ** RESPONSIVE OPTIMIZATION: Switched to a more flexible grid ** */
         .generator-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
+            align-items: start; /* Align items to the top */
         }
 
         .card {
             background: rgba(26, 26, 46, 0.8);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 2rem;
+            padding: clamp(1.5rem, 4vw, 2rem); /* Fluid padding */
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
@@ -215,6 +216,11 @@
             transform: translateY(-4px);
             border-color: var(--accent-purple);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card.preview-area {
+            position: sticky;
+            top: 100px; /* Make preview card sticky on desktop */
         }
 
         .card h3 {
@@ -234,6 +240,13 @@
             color: var(--text-light);
             font-weight: 500;
         }
+        
+        .form-group .description {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: -1rem;
+            margin-bottom: 0.5rem;
+        }
 
         .form-control {
             width: 100%;
@@ -251,6 +264,10 @@
             border-color: var(--primary-purple);
             box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
         }
+        
+        .form-control[type="file"] {
+            padding: 0.5rem;
+        }
 
         textarea.form-control {
             resize: vertical;
@@ -260,7 +277,7 @@
         /* QR Customization */
         .qr-customization {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
@@ -305,10 +322,17 @@
         #qrPreview, #cardPreview {
             background: white;
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1rem; /* Reduced padding for flexibility */
             margin: 1rem auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
+            max-width: 100%; /* Ensure it doesn't overflow */
+            display: inline-block; /* Fit content */
+        }
+        
+        #qrPreview canvas, #qrPreview svg {
+            max-width: 100%;
+            height: auto;
         }
 
         #qrPreview:hover {
@@ -327,10 +351,9 @@
             transform-style: preserve-3d;
             transition: transform 0.6s ease;
             cursor: pointer;
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            width: 350px; /* Fixed width for consistency */
+            height: 500px; /* Fixed height for consistency */
+            max-width: 100%;
             box-shadow: 0 15px 35px rgba(109, 40, 217, 0.3);
         }
 
@@ -359,7 +382,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             padding: 2rem;
+            gap: 1rem;
         }
 
         .card-back {
@@ -383,26 +408,33 @@
         .card-name {
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
         }
 
         .card-title {
             font-size: 1rem;
             opacity: 0.9;
-            margin-bottom: 1rem;
         }
 
         .card-contact {
             font-size: 0.875rem;
             opacity: 0.8;
-            line-height: 1.4;
+            line-height: 1.5;
+            word-break: break-all; /* Prevent overflow */
+        }
+        
+        .card-contact div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-top: auto; /* Push to bottom */
+            padding-top: 1rem;
         }
 
         .social-link {
@@ -421,6 +453,14 @@
         .social-link:hover {
             background: rgba(255,255,255,0.3);
             transform: translateY(-2px);
+        }
+        
+        #cardQR {
+            background: white; 
+            padding: 1rem; 
+            border-radius: 12px; 
+            margin: 1rem auto;
+            width: fit-content;
         }
 
         /* Action Buttons */
@@ -491,7 +531,7 @@
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             text-align: center;
         }
 
@@ -500,6 +540,7 @@
             justify-content: center;
             gap: 2rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap; /* Allow wrapping */
         }
 
         .footer-links a {
@@ -518,43 +559,10 @@
         }
 
         /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Loading Animation */
         .loading {
@@ -566,85 +574,41 @@
             border-top-color: white;
             animation: spin 1s ease-in-out infinite;
         }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
+        
+        /* ** RESPONSIVE OPTIMIZATION: Media Queries for different devices ** */
+        
+        /* For Tablets and smaller desktops */
+        @media (max-width: 1024px) {
+            .card.preview-area {
+                position: static; /* Remove sticky behavior on smaller screens */
             }
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .generator-grid {
-                grid-template-columns: 1fr;
-            }
-            
+        
+        /* For Mobile phones */
+        @media (max-width: 480px) {
             .mode-selector {
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0.75rem;
             }
-            
             .mode-btn {
-                padding: 0.75rem 1.5rem;
+                width: 100%;
             }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .qr-customization {
-                grid-template-columns: 1fr;
-            }
-            
-            .color-picker-group {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            nav {
-                padding: 0 1rem;
-            }
-            
-            main {
-                padding: 1rem;
-            }
-            
-            .breadcrumb {
-                padding: 1rem;
-            }
-            
-            .card {
-                padding: 1.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
             .digital-card {
-                min-height: 250px;
-                padding: 1.5rem;
+                width: 100%;
+                height: 480px; /* Adjust height for mobile */
             }
-        }
-
-        @media (max-width: 480px) {
+            .card-name {
+                font-size: 1.25rem;
+            }
+            .card-title {
+                font-size: 0.875rem;
+            }
+            .card-contact {
+                font-size: 0.8rem;
+            }
             .footer-links {
                 flex-direction: column;
                 gap: 1rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .card-avatar {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-            
-            .card-name {
-                font-size: 1.25rem;
             }
         }
 
@@ -709,7 +673,6 @@
             </button>
         </div>
 
-        <!-- Mode 1: QR vCard Generator -->
         <div id="vcard-mode" class="content-area active">
             <div class="generator-grid">
                 <div class="card">
@@ -757,7 +720,7 @@
                                 <select id="qrStyle" class="form-control">
                                     <option value="square">Square</option>
                                     <option value="dots">Dots</option>
-                                    <option value="rounded">Rounded</option>
+                                    <option value="rounded" selected>Rounded</option>
                                     <option value="extra-rounded">Extra Rounded</option>
                                     <option value="classy">Classy</option>
                                     <option value="classy-rounded">Classy Rounded</option>
@@ -770,7 +733,7 @@
                                 <select id="cornerStyle" class="form-control">
                                     <option value="square">Square</option>
                                     <option value="dot">Dot</option>
-                                    <option value="extra-rounded">Extra Rounded</option>
+                                    <option value="extra-rounded" selected>Extra Rounded</option>
                                 </select>
                             </div>
                         </div>
@@ -816,7 +779,6 @@
             </div>
         </div>
 
-        <!-- Mode 2: Digital Business Card -->
         <div id="card-mode" class="content-area">
             <div class="generator-grid">
                 <div class="card">
@@ -848,11 +810,16 @@
                         </div>
                         <div class="form-group">
                             <label for="cardLinkedIn">LinkedIn</label>
-                            <input type="url" id="cardLinkedIn" class="form-control">
+                            <input type="url" id="cardLinkedIn" class="form-control" placeholder="https://linkedin.com/in/yourprofile">
                         </div>
                         <div class="form-group">
                             <label for="cardTwitter">Twitter</label>
-                            <input type="url" id="cardTwitter" class="form-control">
+                            <input type="url" id="cardTwitter" class="form-control" placeholder="https://twitter.com/yourhandle">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardLogo">QR Code Logo</label>
+                            <input type="file" id="cardLogo" class="form-control" accept="image/png, image/jpeg, image/svg+xml">
+                             <p class="description">Optional: Upload a logo to display in the center of the QR code.</p>
                         </div>
                         <div class="form-group">
                             <label for="cardTemplate">Card Template</label>
@@ -877,17 +844,14 @@
                                 <div class="card-name">Your Name</div>
                                 <div class="card-title">Your Title</div>
                                 <div class="card-contact">
-                                    <div>📧 your.email@company.com</div>
-                                    <div>📱 +1 (555) 123-4567</div>
+                                    <div>📧</div><div>your.email@company.com</div>
+                                    <div>📱</div><div>+1 (555) 123-4567</div>
                                 </div>
                                 <div class="social-links">
-                                    <a href="#" class="social-link">💼</a>
-                                    <a href="#" class="social-link">🌐</a>
-                                    <a href="#" class="social-link">📧</a>
                                 </div>
                             </div>
                             <div class="card-back">
-                                <div id="cardQR" style="background: white; padding: 1rem; border-radius: 12px; margin: 1rem auto;"></div>
+                                <div id="cardQR"></div>
                                 <p style="margin-top: 1rem; opacity: 0.9;">Scan to save contact</p>
                             </div>
                         </div>
@@ -898,9 +862,6 @@
                         </button>
                         <button id="flipCard" class="btn btn-secondary">
                             <span>Flip Card</span>
-                        </button>
-                        <button id="copyContact" class="btn btn-secondary">
-                            <span>Copy vCard</span>
                         </button>
                     </div>
                 </div>
@@ -920,13 +881,13 @@
         </div>
     </footer>
 
-    <!-- QR Code Styling Library -->
-    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.6.0/lib/qr-code-styling.min.js"></script>
     
     <script>
         // Global variables
         let qrCode = null;
         let cardQrCode = null;
+        let cardLogoUrl = null;
         
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
@@ -938,562 +899,233 @@
 
         // Initialize application
         function initializeApp() {
-            // Set focus to first input
             document.getElementById('firstName').focus();
-            
-            // Initialize QR code instances
             initializeQRCode();
             initializeCardQRCode();
         }
 
         // Setup event listeners
         function setupEventListeners() {
-            // Mode switching
-            document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.addEventListener('click', switchMode);
-            });
-
-            // Form inputs for QR vCard
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', switchMode));
+            
             const vcardInputs = ['firstName', 'lastName', 'organization', 'title', 'phone', 'email', 'website', 'address'];
-            vcardInputs.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.addEventListener('input', debounce(generateQRCode, 500));
-                }
-            });
-
-            // QR customization
+            vcardInputs.forEach(id => document.getElementById(id)?.addEventListener('input', debounce(generateQRCode, 500)));
+            
             const qrControls = ['qrStyle', 'cornerStyle', 'foregroundColor', 'backgroundColor', 'qrSize'];
-            qrControls.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.addEventListener('change', generateQRCode);
-                }
-            });
-
-            // Card form inputs
+            qrControls.forEach(id => document.getElementById(id)?.addEventListener('change', generateQRCode));
+            
             const cardInputs = ['cardName', 'cardTitle', 'cardCompany', 'cardPhone', 'cardEmail', 'cardWebsite', 'cardLinkedIn', 'cardTwitter'];
-            cardInputs.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.addEventListener('input', debounce(updateBusinessCard, 500));
-                }
-            });
-
-            // Card template
+            cardInputs.forEach(id => document.getElementById(id)?.addEventListener('input', debounce(updateBusinessCard, 500)));
+            
             document.getElementById('cardTemplate').addEventListener('change', updateBusinessCard);
+            
+            // ** UPDATE: Listener for the new logo input **
+            document.getElementById('cardLogo').addEventListener('change', handleLogoUpload);
 
-            // Action buttons
             document.getElementById('generateQR').addEventListener('click', generateQRCode);
-            document.getElementById('downloadPNG').addEventListener('click', downloadPNG);
-            document.getElementById('downloadSVG').addEventListener('click', downloadSVG);
+            document.getElementById('downloadPNG').addEventListener('click', () => downloadQR('png'));
+            document.getElementById('downloadSVG').addEventListener('click', () => downloadQR('svg'));
             document.getElementById('updateCard').addEventListener('click', updateBusinessCard);
             document.getElementById('flipCard').addEventListener('click', flipBusinessCard);
-            document.getElementById('copyContact').addEventListener('click', copyContactInfo);
-
-            // Card click to flip
             document.getElementById('businessCard').addEventListener('click', flipBusinessCard);
-
-            // Keyboard accessibility
-            document.addEventListener('keydown', handleKeyboardNavigation);
+            
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Enter' && e.target.classList.contains('mode-btn')) e.target.click();
+                if (e.key === 'Escape') document.activeElement.blur();
+            });
         }
 
-        // Mode switching functionality
         function switchMode(e) {
-            const targetMode = e.target.dataset.mode;
-            const buttons = document.querySelectorAll('.mode-btn');
-            const contentAreas = document.querySelectorAll('.content-area');
-
-            // Update button states
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-                btn.setAttribute('aria-pressed', 'false');
+            const targetMode = e.currentTarget.dataset.mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                const isActive = btn === e.currentTarget;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', isActive.toString());
             });
-            e.target.classList.add('active');
-            e.target.setAttribute('aria-pressed', 'true');
-
-            // Show/hide content areas
-            contentAreas.forEach(area => {
-                area.classList.remove('active');
+            document.querySelectorAll('.content-area').forEach(area => {
+                area.classList.toggle('active', area.id === `${targetMode}-mode`);
             });
-            document.getElementById(targetMode + '-mode').classList.add('active');
-
-            // Announce mode change for screen readers
-            announceToScreenReader(`Switched to ${targetMode === 'vcard' ? 'QR vCard Generator' : 'Digital Business Card'} mode`);
         }
 
-        // Initialize QR Code
+        // ** UPDATE: Handle logo upload and convert to Data URL **
+        function handleLogoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    cardLogoUrl = e.target.result;
+                    updateBusinessCard(); // Regenerate card/QR with the new logo
+                };
+                reader.readAsDataURL(file);
+            } else {
+                cardLogoUrl = null;
+                updateBusinessCard();
+            }
+        }
+
         function initializeQRCode() {
             qrCode = new QRCodeStyling({
-                width: 300,
-                height: 300,
-                type: "svg",
-                data: "",
-                margin: 10,
-                qrOptions: {
-                    typeNumber: 0,
-                    mode: "Byte",
-                    errorCorrectionLevel: "M"
-                },
-                imageOptions: {
-                    hideBackgroundDots: true,
-                    imageSize: 0.4,
-                    margin: 0,
-                    crossOrigin: "anonymous",
-                },
-                dotsOptions: {
-                    color: "#6d28d9",
-                    type: "rounded"
-                },
-                backgroundOptions: {
-                    color: "#ffffff",
-                },
-                cornersSquareOptions: {
-                    color: "#6d28d9",
-                    type: "extra-rounded",
-                },
-                cornersDotOptions: {
-                    color: "#6d28d9",
-                    type: "dot",
-                }
+                width: 300, height: 300, type: "svg", margin: 10,
+                qrOptions: { typeNumber: 0, mode: "Byte", errorCorrectionLevel: "M" },
+                dotsOptions: { color: "#6d28d9", type: "rounded" },
+                backgroundOptions: { color: "#ffffff" },
+                cornersSquareOptions: { color: "#6d28d9", type: "extra-rounded" },
+                cornersDotOptions: { color: "#6d28d9", type: "dot" }
             });
         }
 
-        // Initialize Card QR Code
         function initializeCardQRCode() {
             cardQrCode = new QRCodeStyling({
-                width: 150,
-                height: 150,
-                type: "svg",
-                data: "",
-                margin: 5,
-                qrOptions: {
-                    typeNumber: 0,
-                    mode: "Byte",
-                    errorCorrectionLevel: "M"
-                },
-                dotsOptions: {
-                    color: "#6d28d9",
-                    type: "rounded"
-                },
-                backgroundOptions: {
-                    color: "#ffffff",
-                },
-                cornersSquareOptions: {
-                    color: "#6d28d9",
-                    type: "extra-rounded",
-                },
-                cornersDotOptions: {
-                    color: "#6d28d9",
-                    type: "dot",
-                }
+                width: 180, height: 180, type: "svg", margin: 5,
+                qrOptions: { typeNumber: 0, mode: "Byte", errorCorrectionLevel: "H" }, // Higher error correction for logo
+                dotsOptions: { color: "#6d28d9", type: "rounded" },
+                backgroundOptions: { color: "#ffffff" },
+                cornersSquareOptions: { color: "#6d28d9", type: "extra-rounded" },
+                cornersDotOptions: { color: "#6d28d9", type: "dot" },
+                // ** UPDATE: Add imageOptions for the logo **
+                imageOptions: { hideBackgroundDots: true, imageSize: 0.4, margin: 5, crossOrigin: "anonymous" }
             });
         }
-
-        // Generate initial QR code
+        
         function generateInitialQR() {
             const sampleVCard = generateVCardData();
             if (qrCode) {
                 qrCode.update({ data: sampleVCard });
-                qrCode.append(document.getElementById("qrPreview"));
+                const preview = document.getElementById("qrPreview");
+                preview.innerHTML = '';
+                qrCode.append(preview);
             }
         }
 
-        // Generate QR Code
         function generateQRCode() {
-            showLoading('generateQR');
-            
-            setTimeout(() => {
-                const vcardData = generateVCardData();
-                const options = getQROptions();
-                
-                if (qrCode) {
-                    qrCode.update({
-                        data: vcardData,
-                        ...options
-                    });
-                    
-                    // Clear and re-append
-                    const preview = document.getElementById("qrPreview");
-                    preview.innerHTML = '';
-                    qrCode.append(preview);
+            const vcardData = generateVCardData();
+            const options = getQROptions();
+            if (qrCode) {
+                qrCode.update({ data: vcardData, ...options });
+                const preview = document.getElementById("qrPreview");
+                if (!preview.hasChildNodes()) {
+                     preview.innerHTML = '';
+                     qrCode.append(preview);
                 }
-                
-                hideLoading('generateQR');
-                announceToScreenReader('QR code updated');
-            }, 100);
+            }
         }
 
-        // Generate vCard data
-        function generateVCardData() {
-            const firstName = document.getElementById('firstName').value || 'John';
-            const lastName = document.getElementById('lastName').value || 'Doe';
-            const organization = document.getElementById('organization').value || 'Your Company';
-            const title = document.getElementById('title').value || 'Professional';
-            const phone = document.getElementById('phone').value || '+1-555-123-4567';
-            const email = document.getElementById('email').value || 'john.doe@company.com';
-            const website = document.getElementById('website').value || 'https://company.com';
-            const address = document.getElementById('address').value || '123 Business St, City, State 12345';
+        function generateVCardData(isCard = false) {
+            const get = id => document.getElementById(id)?.value || '';
+            const prefix = isCard ? 'card' : '';
+            
+            const firstName = isCard ? (get('cardName').split(' ')[0] || 'Your') : (get('firstName') || 'John');
+            const lastName = isCard ? (get('cardName').split(' ').slice(1).join(' ') || 'Name') : (get('lastName') || 'Doe');
+            const name = get(prefix + 'Name') || `${firstName} ${lastName}`;
+            const org = get(prefix + 'Organization') || get(prefix + 'Company') || 'Your Company';
+            const title = get(prefix + 'Title') || 'Professional';
+            const phone = get(prefix + 'Phone') || '+1-555-123-4567';
+            const email = get(prefix + 'Email') || 'your.email@company.com';
+            const website = get(prefix + 'Website') || 'https://yourwebsite.com';
+            const address = get('address') || '123 Business St, City, State 12345';
 
             return `BEGIN:VCARD
 VERSION:3.0
-FN:${firstName} ${lastName}
+FN:${name}
 N:${lastName};${firstName};;;
-ORG:${organization}
+ORG:${org}
 TITLE:${title}
-TEL:${phone}
+TEL;TYPE=WORK,VOICE:${phone}
 EMAIL:${email}
 URL:${website}
-ADR:;;${address};;;;
+${!isCard ? `ADR;TYPE=WORK:;;${address}` : ''}
 END:VCARD`;
         }
 
-        // Get QR customization options
         function getQROptions() {
-            const style = document.getElementById('qrStyle').value;
-            const cornerStyle = document.getElementById('cornerStyle').value;
-            const foregroundColor = document.getElementById('foregroundColor').value;
-            const backgroundColor = document.getElementById('backgroundColor').value;
-            const size = parseInt(document.getElementById('qrSize').value);
-
+            const get = id => document.getElementById(id).value;
+            const size = parseInt(get('qrSize'));
             return {
-                width: size,
-                height: size,
-                dotsOptions: {
-                    color: foregroundColor,
-                    type: style
-                },
-                backgroundOptions: {
-                    color: backgroundColor,
-                },
-                cornersSquareOptions: {
-                    color: foregroundColor,
-                    type: cornerStyle,
-                },
-                cornersDotOptions: {
-                    color: foregroundColor,
-                    type: cornerStyle === 'square' ? 'square' : 'dot',
-                }
+                width: size, height: size,
+                dotsOptions: { color: get('foregroundColor'), type: get('qrStyle') },
+                backgroundOptions: { color: get('backgroundColor') },
+                cornersSquareOptions: { color: get('foregroundColor'), type: get('cornerStyle') },
+                cornersDotOptions: { color: get('foregroundColor'), type: get('cornerStyle') === 'square' ? 'square' : 'dot' }
             };
         }
 
-        // Update business card
         function updateBusinessCard() {
-            const name = document.getElementById('cardName').value || 'Your Name';
-            const title = document.getElementById('cardTitle').value || 'Your Title';
-            const company = document.getElementById('cardCompany').value || 'Your Company';
-            const phone = document.getElementById('cardPhone').value || '+1 (555) 123-4567';
-            const email = document.getElementById('cardEmail').value || 'your.email@company.com';
-            const website = document.getElementById('cardWebsite').value || 'https://yourwebsite.com';
-            const linkedIn = document.getElementById('cardLinkedIn').value;
-            const twitter = document.getElementById('cardTwitter').value;
-            const template = document.getElementById('cardTemplate').value;
+            const get = id => document.getElementById(id).value;
+            const name = get('cardName') || 'Your Name';
+            const title = get('cardTitle') || 'Your Title';
+            const company = get('cardCompany');
+            const phone = get('cardPhone') || '+1 (555) 123-4567';
+            const email = get('cardEmail') || 'your.email@company.com';
+            const website = get('cardWebsite');
+            const linkedIn = get('cardLinkedIn');
+            const twitter = get('cardTwitter');
 
-            // Update card content
             const card = document.getElementById('businessCard');
             const cardFront = card.querySelector('.card-front');
-            
             cardFront.querySelector('.card-name').textContent = name;
             cardFront.querySelector('.card-title').textContent = title + (company ? ` at ${company}` : '');
             
             const contactDiv = cardFront.querySelector('.card-contact');
             contactDiv.innerHTML = `
-                <div>📧 ${email}</div>
-                <div>📱 ${phone}</div>
-                ${website ? `<div>🌐 ${website}</div>` : ''}
+                <div>📧</div><div>${email}</div>
+                <div>📱</div><div>${phone}</div>
+                ${website ? `<div>🌐</div><div>${website}</div>` : ''}
             `;
 
-            // Update social links
             const socialLinks = cardFront.querySelector('.social-links');
             socialLinks.innerHTML = '';
+            if (linkedIn) socialLinks.innerHTML += `<a href="${linkedIn}" class="social-link" target="_blank" rel="noopener noreferrer">💼</a>`;
+            if (twitter) socialLinks.innerHTML += `<a href="${twitter}" class="social-link" target="_blank" rel="noopener noreferrer">🐦</a>`;
+            if (website) socialLinks.innerHTML += `<a href="${website}" class="social-link" target="_blank" rel="noopener noreferrer">🌐</a>`;
             
-            if (linkedIn) {
-                const linkedInLink = document.createElement('a');
-                linkedInLink.href = linkedIn;
-                linkedInLink.className = 'social-link';
-                linkedInLink.innerHTML = '💼';
-                linkedInLink.target = '_blank';
-                linkedInLink.rel = 'noopener noreferrer';
-                socialLinks.appendChild(linkedInLink);
-            }
-            
-            if (website) {
-                const websiteLink = document.createElement('a');
-                websiteLink.href = website;
-                websiteLink.className = 'social-link';
-                websiteLink.innerHTML = '🌐';
-                websiteLink.target = '_blank';
-                websiteLink.rel = 'noopener noreferrer';
-                socialLinks.appendChild(websiteLink);
-            }
-            
-            if (twitter) {
-                const twitterLink = document.createElement('a');
-                twitterLink.href = twitter;
-                twitterLink.className = 'social-link';
-                twitterLink.innerHTML = '🐦';
-                twitterLink.target = '_blank';
-                twitterLink.rel = 'noopener noreferrer';
-                socialLinks.appendChild(twitterLink);
-            }
+            const template = get('cardTemplate');
+            const templates = {
+                gradient: 'linear-gradient(135deg, #6d28d9, #4c1d95)', dark: 'linear-gradient(135deg, #1f2937, #111827)',
+                blue: 'linear-gradient(135deg, #1e40af, #1e3a8a)', green: 'linear-gradient(135deg, #059669, #047857)'
+            };
+            card.style.background = templates[template] || templates.gradient;
 
-            // Apply template style
-            applyCardTemplate(card, template);
-
-            // Generate QR for card
             generateCardQR();
         }
-
-        // Apply card template
-        function applyCardTemplate(card, template) {
-            const templates = {
-                gradient: 'linear-gradient(135deg, #6d28d9, #4c1d95)',
-                dark: 'linear-gradient(135deg, #1f2937, #111827)',
-                blue: 'linear-gradient(135deg, #1e40af, #1e3a8a)',
-                green: 'linear-gradient(135deg, #059669, #047857)'
-            };
-            
-            card.style.background = templates[template] || templates.gradient;
-        }
-
-        // Generate QR for business card
+        
+        // ** UPDATE: Modified to include the logo (cardLogoUrl) in the QR code **
         function generateCardQR() {
-            const name = document.getElementById('cardName').value || 'Your Name';
-            const phone = document.getElementById('cardPhone').value || '+1 (555) 123-4567';
-            const email = document.getElementById('cardEmail').value || 'your.email@company.com';
-            const website = document.getElementById('cardWebsite').value || '';
-            const company = document.getElementById('cardCompany').value || '';
-            const title = document.getElementById('cardTitle').value || '';
-
-            const vcardData = `BEGIN:VCARD
-VERSION:3.0
-FN:${name}
-ORG:${company}
-TITLE:${title}
-TEL:${phone}
-EMAIL:${email}
-${website ? `URL:${website}` : ''}
-END:VCARD`;
-
+            const vcardData = generateVCardData(true);
             if (cardQrCode) {
-                cardQrCode.update({ data: vcardData });
+                const updateOptions = { data: vcardData };
+                if (cardLogoUrl) {
+                    updateOptions.image = cardLogoUrl;
+                } else {
+                    updateOptions.image = null;
+                }
+                cardQrCode.update(updateOptions);
+                
                 const cardQRDiv = document.getElementById('cardQR');
-                cardQRDiv.innerHTML = '';
-                cardQrCode.append(cardQRDiv);
+                if (cardQRDiv.innerHTML === '' || cardLogoUrl || !cardLogoUrl) {
+                    cardQRDiv.innerHTML = ''; // Clear previous QR
+                    cardQrCode.append(cardQRDiv);
+                }
             }
         }
 
-        // Flip business card
         function flipBusinessCard() {
             const card = document.getElementById('businessCard');
             card.classList.toggle('flipped');
-            
-            // Generate QR if flipping to back and QR doesn't exist
-            if (card.classList.contains('flipped')) {
-                setTimeout(() => {
-                    const cardQRDiv = document.getElementById('cardQR');
-                    if (!cardQRDiv.hasChildNodes()) {
-                        generateCardQR();
-                    }
-                }, 300);
-            }
         }
 
-        // Download functions
-        function downloadPNG() {
+        function downloadQR(extension) {
             if (qrCode) {
-                showLoading('downloadPNG');
-                qrCode.download({
-                    name: "vcard-qr",
-                    extension: "png"
-                });
-                setTimeout(() => hideLoading('downloadPNG'), 1000);
-                announceToScreenReader('QR code downloaded as PNG');
+                qrCode.download({ name: "vcard-qr", extension });
             }
         }
 
-        function downloadSVG() {
-            if (qrCode) {
-                showLoading('downloadSVG');
-                qrCode.download({
-                    name: "vcard-qr",
-                    extension: "svg"
-                });
-                setTimeout(() => hideLoading('downloadSVG'), 1000);
-                announceToScreenReader('QR code downloaded as SVG');
-            }
-        }
-
-        // Copy contact info
-        async function copyContactInfo() {
-            const vcardData = generateVCardData();
-            
-            try {
-                await navigator.clipboard.writeText(vcardData);
-                showNotification('Contact information copied to clipboard!', 'success');
-                announceToScreenReader('Contact information copied to clipboard');
-            } catch (err) {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = vcardData;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                showNotification('Contact information copied to clipboard!', 'success');
-            }
-        }
-
-        // Utility functions
-        function debounce(func, wait) {
+        const debounce = (func, wait) => {
             let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
+            return (...args) => {
                 clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
+                timeout = setTimeout(() => func.apply(this, args), wait);
             };
-        }
-
-        function showLoading(buttonId) {
-            const button = document.getElementById(buttonId);
-            const span = button.querySelector('span');
-            const originalText = span.textContent;
-            span.innerHTML = '<div class="loading"></div> Processing...';
-            button.disabled = true;
-            button.dataset.originalText = originalText;
-        }
-
-        function hideLoading(buttonId) {
-            const button = document.getElementById(buttonId);
-            const span = button.querySelector('span');
-            span.textContent = button.dataset.originalText;
-            button.disabled = false;
-        }
-
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? 'var(--success)' : 'var(--warning)'};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                z-index: 10000;
-                animation: slideIn 0.3s ease-out;
-            `;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease-out forwards';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-        }
-
-        function announceToScreenReader(message) {
-            const announcement = document.createElement('div');
-            announcement.setAttribute('aria-live', 'polite');
-            announcement.setAttribute('aria-atomic', 'true');
-            announcement.className = 'sr-only';
-            announcement.textContent = message;
-            
-            document.body.appendChild(announcement);
-            
-            setTimeout(() => {
-                if (announcement.parentNode) {
-                    announcement.parentNode.removeChild(announcement);
-                }
-            }, 1000);
-        }
-
-        function handleKeyboardNavigation(e) {
-            // Tab through mode buttons
-            if (e.key === 'Enter' && e.target.classList.contains('mode-btn')) {
-                e.target.click();
-            }
-            
-            // Escape to close any modals or reset focus
-            if (e.key === 'Escape') {
-                document.activeElement.blur();
-            }
-        }
-
-        // Add notification animations to head
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            
-            @keyframes slideOut {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Performance monitoring
-        if ('performance' in window) {
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    const perfData = performance.getEntriesByType('navigation')[0];
-                    if (perfData) {
-                        console.log(`Page loaded in ${Math.round(perfData.loadEventEnd - perfData.loadEventStart)}ms`);
-                    }
-                }, 0);
-            });
-        }
-
-        // Service Worker for offline functionality (optional)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // Register service worker if available
-                // navigator.serviceWorker.register('/sw.js');
-            });
-        }
-
-        // Accessibility: Announce page changes
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                    const target = mutation.target;
-                    if (target.classList.contains('active') && target.classList.contains('content-area')) {
-                        const mode = target.id.replace('-mode', '');
-                        announceToScreenReader(`${mode === 'vcard' ? 'QR vCard Generator' : 'Digital Business Card'} section is now active`);
-                    }
-                }
-            });
-        });
-
-        observer.observe(document.body, {
-            attributes: true,
-            subtree: true,
-            attributeFilter: ['class']
-        });
+        };
     </script>
 </body>
 </html>
