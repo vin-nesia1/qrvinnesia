@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCard Generator - VCard Vin Nesia | Premium QR Code Tools</title>
+    <meta name="description" content="Create professional VCard QR codes with advanced customization. Premium QR code generator with modern design and powerful features.">
+    <meta name="keywords" content="vcard qr code, qr generator, digital business card, contact qr, professional qr">
+    <link rel="canonical" href="https://qr.vinnesia.my.id/vcard">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="VCard Generator - VCard Vin Nesia">
+    <meta property="og:description" content="Create professional VCard QR codes with advanced customization">
+    <meta property="og:url" content="https://qr.vinnesia.my.id/vcard">
+    <meta property="og:type" content="website">
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #a855f7;
+            --background: #0a0a0a;
+            --surface: #1a1a1a;
+            --surface-light: #262626;
+            --text: #ffffff;
+            --text-muted: #a1a1aa;
+            --border: #374151;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            margin-top: 80px;
+        }
+        
+        .breadcrumb-content {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Generator Section */
+        .generator {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .form-section, .preview-section {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .form-section:hover, .preview-section:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--background);
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        /* Color Options */
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .color-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.active {
+            border-color: var(--text);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Style Options */
+        .style-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .style-option {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--background);
+        }
+        
+        .style-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .style-option.active {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        .style-preview {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 0.5rem;
+            border-radius: 4px;
+        }
+        
+        /* Generate Button */
+        .generate-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* QR Preview */
+        .qr-preview {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .qr-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 0 auto 2rem;
+            display: inline-block;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        #qrCode {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .download-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .download-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--surface-light);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .download-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .generator {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .color-options {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            
+            .style-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .download-options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="VCard Vin Nesia Logo">
+                    VCard Vin Nesia
+                </a>
+                <nav class="nav-links">
+                    <a href="../">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#about">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <a href="../">Home</a>
+                <span>></span>
+                <span>VCard</span>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h1>Professional VCard Generator</h1>
+                <p>Create stunning QR codes for your digital business cards with advanced customization options and modern design.</p>
+            </section>
+
+            <section class="generator">
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span>📝</span>
+                        Contact Information
+                    </h2>
+                    
+                    <form id="vcardForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="organization">Organization</label>
+                            <input type="text" id="organization" placeholder="Company Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="title">Job Title</label>
+                            <input type="text" id="title" placeholder="CEO, Manager, etc.">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="+1234567890">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="john@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="website">Website</label>
+                            <input type="url" id="website" placeholder="https://example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea id="address" rows="3" placeholder="123 Main St, City, Country"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>QR Code Color</label>
+                            <div class="color-options">
+                                <div class="color-option active" data-color="#000000" style="background: #000000"></div>
+                                <div class="color-option" data-color="#8b5cf6" style="background: #8b5cf6"></div>
+                                <div class="color-option" data-color="#ef4444" style="background: #ef4444"></div>
+                                <div class="color-option" data-color="#10b981" style="background: #10b981"></div>
+                                <div class="color-option" data-color="#f59e0b" style="background: #f59e0b"></div>
+                                <div class="color-option" data-color="#3b82f6" style="background: #3b82f6"></div>
+                                <div class="color-option" data-color="#ec4899" style="background: #ec4899"></div>
+                                <div class="color-option" data-color="#06b6d4" style="background: #06b6d4"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Dot Style</label>
+                            <div class="style-options">
+                                <div class="style-option active" data-style="square">
+                                    <div class="style-preview" style="background: #333; border-radius: 0;"></div>
+                                    <div>Square</div>
+                                </div>
+                                <div class="style-option" data-style="rounded">
+                                    <div class="style-preview" style="background: #333; border-radius: 4px;"></div>
+                                    <div>Rounded</div>
+                                </div>
+                                <div class="style-option" data-style="dots">
+                                    <div class="style-preview" style="background: #333; border-radius: 50%;"></div>
+                                    <div>Dots</div>
+                                </div>
+                                <div class="style-option" data-style="classy">
+                                    <div class="style-preview" style="background: #333; border-radius: 2px; transform: rotate(45deg);"></div>
+                                    <div>Classy</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="generate-btn">
+                            <span class="btn-text">Generate VCard QR</span>
+                            <span class="loading hidden"></span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="preview-section">
+                    <h2 class="section-title">
+                        <span>🎯</span>
+                        QR Code Preview
+                    </h2>
+                    
+                    <div class="qr-preview">
+                        <div class="qr-container">
+                            <div id="qrCode">
+                                <div style="width: 200px; height: 200px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; color: #9ca3af; border-radius: 8px;">
+                                    QR Code will appear here
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="download-options">
+                            <a href="#" class="download-btn" id="downloadPNG">
+                                <span>📸</span>
+                                PNG
+                            </a>
+                            <a href="#" class="download-btn" id="downloadSVG">
+                                <span>🎨</span>
+                                SVG
+                            </a>
+                            <a href="#" class="download-btn" id="downloadVCF">
+                                <span>📇</span>
+                                VCard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="../">Home</a>
+                    <a href="../privacy-policy">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Vin Nesia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script>
+        class VCardGenerator {
+            constructor() {
+                this.currentColor = '#000000';
+                this.currentStyle = 'square';
+                this.currentData = '';
+                this.init();
+            }
+            
+            init() {
+                this.bindEvents();
+                this.generatePlaceholderQR();
+            }
+            
+            bindEvents() {
+                document.getElementById('vcardForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.generateQR();
+                });
+                
+                // Color selection
+                document.querySelectorAll('.color-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        document.querySelectorAll('.color-option').forEach(o => o.classList.remove('active'));
+                        option.classList.add('active');
+                        this.currentColor = option.dataset.color;
+                        if (this.currentData) this.updateQRStyle();
+                    });
+                });
+                
+                // Style selection
+                document.querySelectorAll('.style-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        document.querySelectorAll('.style-option').forEach(o => o.classList.remove('active'));
+                        option.classList.add('active');
+                        this.currentStyle = option.dataset.style;
+                        if (this.currentData) this.updateQRStyle();
+                    });
+                });
+                
+                // Real-time updates
+                const inputs = ['firstName', 'lastName', 'organization', 'title', 'phone', 'email', 'website', 'address'];
+                inputs.forEach(id => {
+                    document.getElementById(id).addEventListener('input', () => {
+                        if (this.hasRequiredFields()) {
+                            this.generateQR();
+                        }
+                    });
+                });
+                
+                // Download buttons
+                document.getElementById('downloadPNG').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.downloadPNG();
+                });
+                
+                document.getElementById('downloadSVG').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.downloadSVG();
+                });
+                
+                document.getElementById('downloadVCF').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.downloadVCF();
+                });
+            }
+            
+            hasRequiredFields() {
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                return firstName.trim() || lastName.trim();
+            }
+            
+            generateVCardData() {
+                const data = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    organization: document.getElementById('organization').value,
+                    title: document.getElementById('title').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value,
+                    website: document.getElementById('website').value,
+                    address: document.getElementById('address').value
+                };
+                
+                let vcard = 'BEGIN:VCARD\n';
+                vcard += 'VERSION:3.0\n';
+                
+                if (data.firstName || data.lastName) {
+                    vcard += `FN:${data.firstName} ${data.lastName}\n`;
+                    vcard += `N:${data.lastName};${data.firstName};;;\n`;
+                }
+                
+                if (data.organization) {
+                    vcard += `ORG:${data.organization}\n`;
+                }
+                
+                if (data.title) {
+                    vcard += `TITLE:${data.title}\n`;
+                }
+                
+                if (data.phone) {
+                    vcard += `TEL:${data.phone}\n`;
+                }
+                
+                if (data.email) {
+                    vcard += `EMAIL:${data.email}\n`;
+                }
+                
+                if (data.website) {
+                    vcard += `URL:${data.website}\n`;
+                }
+                
+                if (data.address) {
+                    vcard += `ADR:;;${data.address};;;;\n`;
+                }
+                
+                vcard += 'END:VCARD';
+                return vcard;
+            }
+            
+            generatePlaceholderQR() {
+                const placeholder = 'BEGIN:VCARD\nVERSION:3.0\nFN:Sample Contact\nORG:VCard Vin Nesia\nEND:VCARD';
+                this.createQRCode(placeholder);
+            }
+            
+            generateQR() {
+                if (!this.hasRequiredFields()) {
+                    alert('Please fill in at least the first name or last name.');
+                    return;
+                }
+                
+                const btnText = document.querySelector('.btn-text');
+                const loading = document.querySelector('.loading');
+                
+                btnText.classList.add('hidden');
+                loading.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    this.currentData = this.generateVCardData();
+                    this.createQRCode(this.currentData);
+                    
+                    btnText.classList.remove('hidden');
+                    loading.classList.add('hidden');
+                }, 500);
+            }
+            
+            createQRCode(data) {
+                const qr = qrcode(0, 'M');
+                qr.addData(data);
+                qr.make();
+                
+                this.displayQRCode(qr);
+            }
+            
+            displayQRCode(qr) {
+                const size = 8;
+                const margin = 4;
+                const modules = qr.getModuleCount();
+                const qrSize = (modules + margin * 2) * size;
+                
+                let svg = `<svg width="${qrSize}" height="${qrSize}" viewBox="0 0 ${qrSize} ${qrSize}" xmlns="http://www.w3.org/2000/svg">`;
+                svg += `<rect width="${qrSize}" height="${qrSize}" fill="white"/>`;
+                
+                for (let row = 0; row < modules; row++) {
+                    for (let col = 0; col < modules; col++) {
+                        if (qr.isDark(row, col)) {
+                            const x = (col + margin) * size;
+                            const y = (row + margin) * size;
+                            
+                            svg += this.createModuleElement(x, y, size);
+                        }
+                    }
+                }
+                
+                svg += '</svg>';
+                
+                document.getElementById('qrCode').innerHTML = svg;
+            }
+            
+            createModuleElement(x, y, size) {
+                switch (this.currentStyle) {
+                    case 'rounded':
+                        return `<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${this.currentColor}" rx="2"/>`;
+                    case 'dots':
+                        const radius = size / 2;
+                        const cx = x + radius;
+                        const cy = y + radius;
+                        return `<circle cx="${cx}" cy="${cy}" r="${radius}" fill="${this.currentColor}"/>`;
+                    case 'classy':
+                        const centerX = x + size / 2;
+                        const centerY = y + size / 2;
+                        const rotatedSize = size * 0.8;
+                        return `<rect x="${centerX - rotatedSize/2}" y="${centerY - rotatedSize/2}" width="${rotatedSize}" height="${rotatedSize}" fill="${this.currentColor}" rx="1" transform="rotate(45 ${centerX} ${centerY})"/>`;
+                    default:
+                        return `<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${this.currentColor}"/>`;
+                }
+            }
+            
+            updateQRStyle() {
+                if (this.currentData) {
+                    this.createQRCode(this.currentData);
+                }
+            }
+            
+            downloadPNG() {
+                const svg = document.getElementById('qrCode').innerHTML;
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                canvas.width = 400;
+                canvas.height = 400;
+                
+                const svgBlob = new Blob([svg], {type: 'image/svg+xml;charset=utf-8'});
+                const url = URL.createObjectURL(svgBlob);
+                
+                img.onload = () => {
+                    ctx.drawImage(img, 0, 0, 400, 400);
+                    const link = document.createElement('a');
+                    link.download = 'vcard-qr.png';
+                    link.href = canvas.toDataURL('image/png');
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                };
+                
+                img.src = url;
+            }
+            
+            downloadSVG() {
+                const svg = document.getElementById('qrCode').innerHTML;
+                const blob = new Blob([svg], {type: 'image/svg+xml'});
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = 'vcard-qr.svg';
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+            
+            downloadVCF() {
+                if (!this.currentData) {
+                    alert('Please generate a QR code first.');
+                    return;
+                }
+                
+                const blob = new Blob([this.currentData], {type: 'text/vcard'});
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = 'contact.vcf';
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+        }
+        
+        // Initialize the VCard Generator
+        document.addEventListener('DOMContentLoaded', () => {
+            new VCardGenerator();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Header scroll effect
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Performance optimization
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        // Observe sections for animations
+        document.querySelectorAll('.form-section, .preview-section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Add CSS animation class
+        const style = document.createElement('style');
+        style.textContent = `
+            .animate-in {
+                animation: slideInUp 0.6s ease-out forwards;
+            }
+            
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Service Worker for PWA capabilities
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
