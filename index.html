@@ -62,7 +62,7 @@
         nav {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem; /* Adjusted padding for better spacing */
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -88,7 +88,7 @@
         .breadcrumb {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 1.5rem;
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -110,7 +110,7 @@
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1.5rem; /* Consistent padding */
+            padding: 2rem clamp(1rem, 5vw, 2rem); /* Adaptive padding */
             min-height: calc(100vh - 200px);
         }
 
@@ -120,7 +120,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.25rem, 5vw, 3.5rem); /* Adjusted for better scaling */
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 800;
             background: linear-gradient(135deg, var(--primary-purple), var(--accent-purple));
             -webkit-background-clip: text;
@@ -130,9 +130,9 @@
         }
 
         .hero p {
-            font-size: clamp(1rem, 2.5vw, 1.125rem); /* Fluid font size */
+            font-size: 1.125rem;
             color: var(--text-muted);
-            max-width: 650px; /* Increased max-width */
+            max-width: 600px;
             margin: 0 auto 2rem;
             animation: fadeInUp 1s ease-out 0.2s both;
         }
@@ -144,7 +144,6 @@
             gap: 1rem;
             margin-bottom: 3rem;
             animation: fadeInUp 1s ease-out 0.4s both;
-            flex-wrap: wrap; /* Allow wrapping on small screens */
         }
 
         .mode-btn {
@@ -193,34 +192,34 @@
         .content-area.active {
             display: block;
         }
-
-        /* ** RESPONSIVE OPTIMIZATION: Switched to a more flexible grid ** */
+        
+        /* Responsive Grid (Updated) */
         .generator-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
-            align-items: start; /* Align items to the top */
+            align-items: start;
         }
 
         .card {
             background: rgba(26, 26, 46, 0.8);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: clamp(1.5rem, 4vw, 2rem); /* Fluid padding */
+            padding: 2rem;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+        }
+        
+        .card.preview-area {
+            position: sticky;
+            top: 100px;
         }
 
         .card:hover {
             transform: translateY(-4px);
             border-color: var(--accent-purple);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .card.preview-area {
-            position: sticky;
-            top: 100px; /* Make preview card sticky on desktop */
         }
 
         .card h3 {
@@ -240,13 +239,6 @@
             color: var(--text-light);
             font-weight: 500;
         }
-        
-        .form-group .description {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: -1rem;
-            margin-bottom: 0.5rem;
-        }
 
         .form-control {
             width: 100%;
@@ -264,10 +256,6 @@
             border-color: var(--primary-purple);
             box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
         }
-        
-        .form-control[type="file"] {
-            padding: 0.5rem;
-        }
 
         textarea.form-control {
             resize: vertical;
@@ -277,7 +265,7 @@
         /* QR Customization */
         .qr-customization {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
@@ -301,6 +289,27 @@
             transform: scale(1.1);
         }
 
+        /* Preset Colors (New) */
+        .preset-colors {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            padding: 0;
+        }
+        .color-swatch:hover {
+            transform: scale(1.15);
+            border-color: var(--accent-purple);
+        }
+
         .select-wrapper {
             position: relative;
         }
@@ -322,17 +331,10 @@
         #qrPreview, #cardPreview {
             background: white;
             border-radius: 12px;
-            padding: 1rem; /* Reduced padding for flexibility */
+            padding: 2rem;
             margin: 1rem auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
-            max-width: 100%; /* Ensure it doesn't overflow */
-            display: inline-block; /* Fit content */
-        }
-        
-        #qrPreview canvas, #qrPreview svg {
-            max-width: 100%;
-            height: auto;
         }
 
         #qrPreview:hover {
@@ -351,9 +353,10 @@
             transform-style: preserve-3d;
             transition: transform 0.6s ease;
             cursor: pointer;
-            width: 350px; /* Fixed width for consistency */
-            height: 500px; /* Fixed height for consistency */
-            max-width: 100%;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             box-shadow: 0 15px 35px rgba(109, 40, 217, 0.3);
         }
 
@@ -384,7 +387,6 @@
             justify-content: center;
             align-items: center;
             padding: 2rem;
-            gap: 1rem;
         }
 
         .card-back {
@@ -408,33 +410,26 @@
         .card-name {
             font-size: 1.5rem;
             font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
         .card-title {
             font-size: 1rem;
             opacity: 0.9;
+            margin-bottom: 1rem;
         }
 
         .card-contact {
             font-size: 0.875rem;
             opacity: 0.8;
-            line-height: 1.5;
-            word-break: break-all; /* Prevent overflow */
-        }
-        
-        .card-contact div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            line-height: 1.4;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-top: auto; /* Push to bottom */
-            padding-top: 1rem;
+            margin-top: 1rem;
         }
 
         .social-link {
@@ -454,15 +449,14 @@
             background: rgba(255,255,255,0.3);
             transform: translateY(-2px);
         }
-        
-        #cardQR {
+
+        #cardQR { 
             background: white; 
             padding: 1rem; 
             border-radius: 12px; 
             margin: 1rem auto;
-            width: fit-content;
         }
-
+        
         /* Action Buttons */
         .action-buttons {
             display: flex;
@@ -531,7 +525,7 @@
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
             text-align: center;
         }
 
@@ -540,7 +534,6 @@
             justify-content: center;
             gap: 2rem;
             margin-bottom: 1rem;
-            flex-wrap: wrap; /* Allow wrapping */
         }
 
         .footer-links a {
@@ -574,41 +567,42 @@
             border-top-color: white;
             animation: spin 1s ease-in-out infinite;
         }
-        
-        /* ** RESPONSIVE OPTIMIZATION: Media Queries for different devices ** */
-        
-        /* For Tablets and smaller desktops */
-        @media (max-width: 1024px) {
+
+        /* Responsive Design (Updated) */
+        @media (max-width: 992px) {
             .card.preview-area {
-                position: static; /* Remove sticky behavior on smaller screens */
+                position: static;
             }
         }
         
-        /* For Mobile phones */
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .mode-selector {
                 flex-direction: column;
-                gap: 0.75rem;
+                gap: 0.5rem;
             }
             .mode-btn {
-                width: 100%;
+                padding: 0.75rem 1.5rem;
             }
-            .digital-card {
-                width: 100%;
-                height: 480px; /* Adjust height for mobile */
+            .action-buttons {
+                flex-direction: column;
             }
-            .card-name {
-                font-size: 1.25rem;
-            }
-            .card-title {
-                font-size: 0.875rem;
-            }
-            .card-contact {
-                font-size: 0.8rem;
-            }
+        }
+        
+        @media (max-width: 480px) {
             .footer-links {
                 flex-direction: column;
                 gap: 1rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .card-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            .card-name {
+                font-size: 1.25rem;
             }
         }
 
@@ -720,10 +714,12 @@
                                 <select id="qrStyle" class="form-control">
                                     <option value="square">Square</option>
                                     <option value="dots">Dots</option>
-                                    <option value="rounded" selected>Rounded</option>
+                                    <option value="rounded">Rounded</option>
                                     <option value="extra-rounded">Extra Rounded</option>
                                     <option value="classy">Classy</option>
                                     <option value="classy-rounded">Classy Rounded</option>
+                                    <option value="fluid">Fluid</option>
+                                    <option value="stylish">Stylish</option>
                                 </select>
                             </div>
                         </div>
@@ -733,7 +729,7 @@
                                 <select id="cornerStyle" class="form-control">
                                     <option value="square">Square</option>
                                     <option value="dot">Dot</option>
-                                    <option value="extra-rounded" selected>Extra Rounded</option>
+                                    <option value="extra-rounded">Extra Rounded</option>
                                 </select>
                             </div>
                         </div>
@@ -747,6 +743,18 @@
                                 <input type="color" id="backgroundColor" class="color-picker" value="#ffffff">
                             </div>
                         </div>
+
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Color Presets (Foreground / Background)</label>
+                            <div class="preset-colors">
+                                <button class="color-swatch" title="Dark" data-fg="#000000" data-bg="#FFFFFF" style="background-color: #000000;"></button>
+                                <button class="color-swatch" title="Purple" data-fg="#6d28d9" data-bg="#FFFFFF" style="background-color: #6d28d9;"></button>
+                                <button class="color-swatch" title="Ocean Blue" data-fg="#0c4a6e" data-bg="#FFFFFF" style="background-color: #0c4a6e;"></button>
+                                <button class="color-swatch" title="Forest Green" data-fg="#14532d" data-bg="#FFFFFF" style="background-color: #14532d;"></button>
+                                <button class="color-swatch" title="Inverted Purple" data-fg="#FFFFFF" data-bg="#4c1d95" style="background-color: #4c1d95;"></button>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="qrSize">QR Code Size</label>
                             <div class="select-wrapper">
@@ -810,16 +818,16 @@
                         </div>
                         <div class="form-group">
                             <label for="cardLinkedIn">LinkedIn</label>
-                            <input type="url" id="cardLinkedIn" class="form-control" placeholder="https://linkedin.com/in/yourprofile">
+                            <input type="url" id="cardLinkedIn" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="cardTwitter">Twitter</label>
-                            <input type="url" id="cardTwitter" class="form-control" placeholder="https://twitter.com/yourhandle">
+                            <input type="url" id="cardTwitter" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="cardLogo">QR Code Logo</label>
                             <input type="file" id="cardLogo" class="form-control" accept="image/png, image/jpeg, image/svg+xml">
-                             <p class="description">Optional: Upload a logo to display in the center of the QR code.</p>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">Optional: Upload a logo to display in the center of the QR code.</p>
                         </div>
                         <div class="form-group">
                             <label for="cardTemplate">Card Template</label>
@@ -844,10 +852,13 @@
                                 <div class="card-name">Your Name</div>
                                 <div class="card-title">Your Title</div>
                                 <div class="card-contact">
-                                    <div>📧</div><div>your.email@company.com</div>
-                                    <div>📱</div><div>+1 (555) 123-4567</div>
+                                    <div>📧 your.email@company.com</div>
+                                    <div>📱 +1 (555) 123-4567</div>
                                 </div>
                                 <div class="social-links">
+                                    <a href="#" class="social-link">💼</a>
+                                    <a href="#" class="social-link">🌐</a>
+                                    <a href="#" class="social-link">📧</a>
                                 </div>
                             </div>
                             <div class="card-back">
@@ -862,6 +873,9 @@
                         </button>
                         <button id="flipCard" class="btn btn-secondary">
                             <span>Flip Card</span>
+                        </button>
+                        <button id="copyContact" class="btn btn-secondary">
+                            <span>Copy vCard</span>
                         </button>
                     </div>
                 </div>
@@ -899,62 +913,103 @@
 
         // Initialize application
         function initializeApp() {
+            // Set focus to first input
             document.getElementById('firstName').focus();
+            
+            // Initialize QR code instances
             initializeQRCode();
             initializeCardQRCode();
         }
 
         // Setup event listeners
         function setupEventListeners() {
-            document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', switchMode));
-            
+            // Mode switching
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', switchMode);
+            });
+
+            // Form inputs for QR vCard
             const vcardInputs = ['firstName', 'lastName', 'organization', 'title', 'phone', 'email', 'website', 'address'];
-            vcardInputs.forEach(id => document.getElementById(id)?.addEventListener('input', debounce(generateQRCode, 500)));
-            
+            vcardInputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', debounce(generateQRCode, 500));
+                }
+            });
+
+            // QR customization
             const qrControls = ['qrStyle', 'cornerStyle', 'foregroundColor', 'backgroundColor', 'qrSize'];
-            qrControls.forEach(id => document.getElementById(id)?.addEventListener('change', generateQRCode));
-            
+            qrControls.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', generateQRCode);
+                }
+            });
+
+            // Color Preset Swatches
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.getElementById('foregroundColor').value = e.target.dataset.fg;
+                    document.getElementById('backgroundColor').value = e.target.dataset.bg;
+                    // Trigger change event to update QR code live
+                    document.getElementById('foregroundColor').dispatchEvent(new Event('change'));
+                    document.getElementById('backgroundColor').dispatchEvent(new Event('change'));
+                });
+            });
+
+            // Card form inputs
             const cardInputs = ['cardName', 'cardTitle', 'cardCompany', 'cardPhone', 'cardEmail', 'cardWebsite', 'cardLinkedIn', 'cardTwitter'];
-            cardInputs.forEach(id => document.getElementById(id)?.addEventListener('input', debounce(updateBusinessCard, 500)));
-            
+            cardInputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', debounce(updateBusinessCard, 500));
+                }
+            });
+
+            // Card template and logo
             document.getElementById('cardTemplate').addEventListener('change', updateBusinessCard);
-            
-            // ** UPDATE: Listener for the new logo input **
             document.getElementById('cardLogo').addEventListener('change', handleLogoUpload);
 
+            // Action buttons
             document.getElementById('generateQR').addEventListener('click', generateQRCode);
-            document.getElementById('downloadPNG').addEventListener('click', () => downloadQR('png'));
-            document.getElementById('downloadSVG').addEventListener('click', () => downloadQR('svg'));
+            document.getElementById('downloadPNG').addEventListener('click', downloadPNG);
+            document.getElementById('downloadSVG').addEventListener('click', downloadSVG);
             document.getElementById('updateCard').addEventListener('click', updateBusinessCard);
             document.getElementById('flipCard').addEventListener('click', flipBusinessCard);
+            document.getElementById('copyContact').addEventListener('click', copyContactInfo);
+
+            // Card click to flip
             document.getElementById('businessCard').addEventListener('click', flipBusinessCard);
-            
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Enter' && e.target.classList.contains('mode-btn')) e.target.click();
-                if (e.key === 'Escape') document.activeElement.blur();
-            });
+
+            // Keyboard accessibility
+            document.addEventListener('keydown', handleKeyboardNavigation);
         }
 
+        // Mode switching functionality
         function switchMode(e) {
             const targetMode = e.currentTarget.dataset.mode;
-            document.querySelectorAll('.mode-btn').forEach(btn => {
-                const isActive = btn === e.currentTarget;
-                btn.classList.toggle('active', isActive);
-                btn.setAttribute('aria-pressed', isActive.toString());
+            const buttons = document.querySelectorAll('.mode-btn');
+            const contentAreas = document.querySelectorAll('.content-area');
+
+            buttons.forEach(btn => {
+                btn.classList.toggle('active', btn === e.currentTarget);
+                btn.setAttribute('aria-pressed', btn === e.currentTarget);
             });
-            document.querySelectorAll('.content-area').forEach(area => {
+
+            contentAreas.forEach(area => {
                 area.classList.toggle('active', area.id === `${targetMode}-mode`);
             });
         }
 
-        // ** UPDATE: Handle logo upload and convert to Data URL **
+        // Handle logo upload
         function handleLogoUpload(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     cardLogoUrl = e.target.result;
-                    updateBusinessCard(); // Regenerate card/QR with the new logo
+                    updateBusinessCard();
                 };
                 reader.readAsDataURL(file);
             } else {
@@ -963,113 +1018,150 @@
             }
         }
 
+        // Initialize Main QR Code
         function initializeQRCode() {
             qrCode = new QRCodeStyling({
-                width: 300, height: 300, type: "svg", margin: 10,
-                qrOptions: { typeNumber: 0, mode: "Byte", errorCorrectionLevel: "M" },
-                dotsOptions: { color: "#6d28d9", type: "rounded" },
-                backgroundOptions: { color: "#ffffff" },
-                cornersSquareOptions: { color: "#6d28d9", type: "extra-rounded" },
-                cornersDotOptions: { color: "#6d28d9", type: "dot" }
+                width: 300,
+                height: 300,
+                type: "svg",
+                data: "",
+                margin: 10
             });
         }
 
+        // Initialize Card QR Code with logo support
         function initializeCardQRCode() {
             cardQrCode = new QRCodeStyling({
-                width: 180, height: 180, type: "svg", margin: 5,
-                qrOptions: { typeNumber: 0, mode: "Byte", errorCorrectionLevel: "H" }, // Higher error correction for logo
-                dotsOptions: { color: "#6d28d9", type: "rounded" },
-                backgroundOptions: { color: "#ffffff" },
-                cornersSquareOptions: { color: "#6d28d9", type: "extra-rounded" },
-                cornersDotOptions: { color: "#6d28d9", type: "dot" },
-                // ** UPDATE: Add imageOptions for the logo **
-                imageOptions: { hideBackgroundDots: true, imageSize: 0.4, margin: 5, crossOrigin: "anonymous" }
+                width: 160,
+                height: 160,
+                type: "svg",
+                data: "",
+                margin: 5,
+                qrOptions: {
+                    typeNumber: 0,
+                    mode: "Byte",
+                    errorCorrectionLevel: "H" // High error correction for logo
+                },
+                imageOptions: {
+                    hideBackgroundDots: true,
+                    imageSize: 0.4,
+                    margin: 5,
+                    crossOrigin: "anonymous",
+                }
             });
         }
-        
+
+        // Generate initial QR code
         function generateInitialQR() {
             const sampleVCard = generateVCardData();
             if (qrCode) {
                 qrCode.update({ data: sampleVCard });
-                const preview = document.getElementById("qrPreview");
-                preview.innerHTML = '';
-                qrCode.append(preview);
+                qrCode.append(document.getElementById("qrPreview"));
             }
         }
 
+        // Generate QR Code
         function generateQRCode() {
-            const vcardData = generateVCardData();
-            const options = getQROptions();
-            if (qrCode) {
-                qrCode.update({ data: vcardData, ...options });
-                const preview = document.getElementById("qrPreview");
-                if (!preview.hasChildNodes()) {
-                     preview.innerHTML = '';
-                     qrCode.append(preview);
+            showLoading('generateQR');
+            
+            setTimeout(() => {
+                const vcardData = generateVCardData();
+                const options = getQROptions();
+                
+                if (qrCode) {
+                    qrCode.update({
+                        data: vcardData,
+                        ...options
+                    });
+                    
+                    const preview = document.getElementById("qrPreview");
+                    if (!preview.hasChildNodes()) {
+                        preview.innerHTML = '';
+                        qrCode.append(preview);
+                    }
                 }
-            }
+                
+                hideLoading('generateQR');
+            }, 100);
         }
 
-        function generateVCardData(isCard = false) {
-            const get = id => document.getElementById(id)?.value || '';
-            const prefix = isCard ? 'card' : '';
-            
-            const firstName = isCard ? (get('cardName').split(' ')[0] || 'Your') : (get('firstName') || 'John');
-            const lastName = isCard ? (get('cardName').split(' ').slice(1).join(' ') || 'Name') : (get('lastName') || 'Doe');
-            const name = get(prefix + 'Name') || `${firstName} ${lastName}`;
-            const org = get(prefix + 'Organization') || get(prefix + 'Company') || 'Your Company';
-            const title = get(prefix + 'Title') || 'Professional';
-            const phone = get(prefix + 'Phone') || '+1-555-123-4567';
-            const email = get(prefix + 'Email') || 'your.email@company.com';
-            const website = get(prefix + 'Website') || 'https://yourwebsite.com';
-            const address = get('address') || '123 Business St, City, State 12345';
+        // Generate vCard data
+        function generateVCardData() {
+            const firstName = document.getElementById('firstName').value || 'John';
+            const lastName = document.getElementById('lastName').value || 'Doe';
+            const organization = document.getElementById('organization').value || 'Your Company';
+            const title = document.getElementById('title').value || 'Professional';
+            const phone = document.getElementById('phone').value || '+1-555-123-4567';
+            const email = document.getElementById('email').value || 'john.doe@company.com';
+            const website = document.getElementById('website').value || 'https://company.com';
+            const address = document.getElementById('address').value || '123 Business St, City, State 12345';
 
             return `BEGIN:VCARD
 VERSION:3.0
-FN:${name}
+FN:${firstName} ${lastName}
 N:${lastName};${firstName};;;
-ORG:${org}
+ORG:${organization}
 TITLE:${title}
-TEL;TYPE=WORK,VOICE:${phone}
+TEL:${phone}
 EMAIL:${email}
 URL:${website}
-${!isCard ? `ADR;TYPE=WORK:;;${address}` : ''}
+ADR:;;${address};;;;
 END:VCARD`;
         }
 
+        // Get QR customization options
         function getQROptions() {
-            const get = id => document.getElementById(id).value;
-            const size = parseInt(get('qrSize'));
+            const style = document.getElementById('qrStyle').value;
+            const cornerStyle = document.getElementById('cornerStyle').value;
+            const foregroundColor = document.getElementById('foregroundColor').value;
+            const backgroundColor = document.getElementById('backgroundColor').value;
+            const size = parseInt(document.getElementById('qrSize').value);
+
             return {
-                width: size, height: size,
-                dotsOptions: { color: get('foregroundColor'), type: get('qrStyle') },
-                backgroundOptions: { color: get('backgroundColor') },
-                cornersSquareOptions: { color: get('foregroundColor'), type: get('cornerStyle') },
-                cornersDotOptions: { color: get('foregroundColor'), type: get('cornerStyle') === 'square' ? 'square' : 'dot' }
+                width: size,
+                height: size,
+                dotsOptions: {
+                    color: foregroundColor,
+                    type: style
+                },
+                backgroundOptions: {
+                    color: backgroundColor,
+                },
+                cornersSquareOptions: {
+                    color: foregroundColor,
+                    type: cornerStyle,
+                },
+                cornersDotOptions: {
+                    color: foregroundColor,
+                    type: cornerStyle === 'square' ? 'square' : 'dot',
+                }
             };
         }
 
+        // Update business card
         function updateBusinessCard() {
-            const get = id => document.getElementById(id).value;
-            const name = get('cardName') || 'Your Name';
-            const title = get('cardTitle') || 'Your Title';
-            const company = get('cardCompany');
-            const phone = get('cardPhone') || '+1 (555) 123-4567';
-            const email = get('cardEmail') || 'your.email@company.com';
-            const website = get('cardWebsite');
-            const linkedIn = get('cardLinkedIn');
-            const twitter = get('cardTwitter');
+            const name = document.getElementById('cardName').value || 'Your Name';
+            const title = document.getElementById('cardTitle').value || 'Your Title';
+            const company = document.getElementById('cardCompany').value || 'Your Company';
+            const phone = document.getElementById('cardPhone').value || '+1 (555) 123-4567';
+            const email = document.getElementById('cardEmail').value || 'your.email@company.com';
+            const website = document.getElementById('cardWebsite').value || 'https://yourwebsite.com';
+            const linkedIn = document.getElementById('cardLinkedIn').value;
+            const twitter = document.getElementById('cardTwitter').value;
+            const template = document.getElementById('cardTemplate').value;
 
+            // Update card content
             const card = document.getElementById('businessCard');
             const cardFront = card.querySelector('.card-front');
+            
             cardFront.querySelector('.card-name').textContent = name;
             cardFront.querySelector('.card-title').textContent = title + (company ? ` at ${company}` : '');
             
             const contactDiv = cardFront.querySelector('.card-contact');
             contactDiv.innerHTML = `
-                <div>📧</div><div>${email}</div>
-                <div>📱</div><div>${phone}</div>
-                ${website ? `<div>🌐</div><div>${website}</div>` : ''}
+                <div>📧 ${email}</div>
+                <div>📱 ${phone}</div>
+                ${website ? `<div>🌐 ${website}</div>` : ''}
             `;
 
             const socialLinks = cardFront.querySelector('.social-links');
@@ -1077,20 +1169,41 @@ END:VCARD`;
             if (linkedIn) socialLinks.innerHTML += `<a href="${linkedIn}" class="social-link" target="_blank" rel="noopener noreferrer">💼</a>`;
             if (twitter) socialLinks.innerHTML += `<a href="${twitter}" class="social-link" target="_blank" rel="noopener noreferrer">🐦</a>`;
             if (website) socialLinks.innerHTML += `<a href="${website}" class="social-link" target="_blank" rel="noopener noreferrer">🌐</a>`;
-            
-            const template = get('cardTemplate');
-            const templates = {
-                gradient: 'linear-gradient(135deg, #6d28d9, #4c1d95)', dark: 'linear-gradient(135deg, #1f2937, #111827)',
-                blue: 'linear-gradient(135deg, #1e40af, #1e3a8a)', green: 'linear-gradient(135deg, #059669, #047857)'
-            };
-            card.style.background = templates[template] || templates.gradient;
 
+            applyCardTemplate(card, template);
             generateCardQR();
         }
-        
-        // ** UPDATE: Modified to include the logo (cardLogoUrl) in the QR code **
+
+        // Apply card template
+        function applyCardTemplate(card, template) {
+            const templates = {
+                gradient: 'linear-gradient(135deg, #6d28d9, #4c1d95)',
+                dark: 'linear-gradient(135deg, #1f2937, #111827)',
+                blue: 'linear-gradient(135deg, #1e40af, #1e3a8a)',
+                green: 'linear-gradient(135deg, #059669, #047857)'
+            };
+            card.style.background = templates[template] || templates.gradient;
+        }
+
+        // Generate QR for business card
         function generateCardQR() {
-            const vcardData = generateVCardData(true);
+            const name = document.getElementById('cardName').value || 'Your Name';
+            const phone = document.getElementById('cardPhone').value || '+1 (555) 123-4567';
+            const email = document.getElementById('cardEmail').value || 'your.email@company.com';
+            const website = document.getElementById('cardWebsite').value || '';
+            const company = document.getElementById('cardCompany').value || '';
+            const title = document.getElementById('cardTitle').value || '';
+
+            const vcardData = `BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+ORG:${company}
+TITLE:${title}
+TEL:${phone}
+EMAIL:${email}
+${website ? `URL:${website}` : ''}
+END:VCARD`;
+
             if (cardQrCode) {
                 const updateOptions = { data: vcardData };
                 if (cardLogoUrl) {
@@ -1099,33 +1212,82 @@ END:VCARD`;
                     updateOptions.image = null;
                 }
                 cardQrCode.update(updateOptions);
-                
                 const cardQRDiv = document.getElementById('cardQR');
-                if (cardQRDiv.innerHTML === '' || cardLogoUrl || !cardLogoUrl) {
-                    cardQRDiv.innerHTML = ''; // Clear previous QR
-                    cardQrCode.append(cardQRDiv);
-                }
+                cardQRDiv.innerHTML = '';
+                cardQrCode.append(cardQRDiv);
             }
         }
 
+        // Flip business card
         function flipBusinessCard() {
             const card = document.getElementById('businessCard');
             card.classList.toggle('flipped');
         }
 
-        function downloadQR(extension) {
+        // Download functions
+        function downloadPNG() {
             if (qrCode) {
-                qrCode.download({ name: "vcard-qr", extension });
+                qrCode.download({ name: "vcard-qr", extension: "png" });
             }
         }
 
-        const debounce = (func, wait) => {
+        function downloadSVG() {
+            if (qrCode) {
+                qrCode.download({ name: "vcard-qr", extension: "svg" });
+            }
+        }
+
+        // Copy contact info
+        async function copyContactInfo() {
+            const vcardData = generateVCardData();
+            try {
+                await navigator.clipboard.writeText(vcardData);
+                // Simple alert for confirmation for now
+                alert('Contact information copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy contact info.');
+            }
+        }
+
+        // Utility functions
+        function debounce(func, wait) {
             let timeout;
-            return (...args) => {
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
                 clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
+                timeout = setTimeout(later, wait);
             };
-        };
+        }
+
+        function showLoading(buttonId) {
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+            const span = button.querySelector('span');
+            const originalText = span.textContent;
+            span.innerHTML = '<div class="loading"></div> Processing...';
+            button.disabled = true;
+            button.dataset.originalText = originalText;
+        }
+
+        function hideLoading(buttonId) {
+            const button = document.getElementById(buttonId);
+            if (!button) return;
+            const span = button.querySelector('span');
+            span.textContent = button.dataset.originalText;
+            button.disabled = false;
+        }
+
+        function handleKeyboardNavigation(e) {
+            if (e.key === 'Enter' && e.target.classList.contains('mode-btn')) {
+                e.target.click();
+            }
+            if (e.key === 'Escape') {
+                document.activeElement.blur();
+            }
+        }
     </script>
 </body>
 </html>
